@@ -1,6 +1,7 @@
-from flask import render_template, request
+from flask import render_template, request, jsonify, make_response,redirect, url_for
 from app.db import DB
 import hashlib
+#from flask_jwt_extended import create_access_token, set_access_cookies, create_refresh_token
 
 def user_main_service():
     return render_template('/user/main.html')
@@ -15,13 +16,16 @@ def user_login_service():
         SQL = "SELECT * FROM XMEMBER where memberid = '{0}' and password = '{1}'".format(memberid,password)
         conn = DB('dict')
         result = conn.select_all(SQL,None)
-        if len(result)!=0:
-            return render_template('/user/main.html', user=result)
-        else:
+        if len(result)==0:
+            #return jsonify({"login": False}), 401
             return render_template('/user/login.html')
-            
-
-
+        else:
+            #access_token = create_access_token(identity=memberid)
+            #response = make_response({'login': True})
+            #set_access_cookies(response, access_token)
+            #return response
+            #return jsonify({"access_token": access_token})
+            return render_template('/user/main.html', user=result)
 
 def user_join_service():
     if request.method=='GET':

@@ -1,5 +1,6 @@
 from flask import render_template, request
 from app.db import DB
+import hashlib
 
 def user_main_service():
     return render_template('/user/main.html')
@@ -8,9 +9,10 @@ def user_login_service():
     if request.method=='GET':
         return render_template('/user/login.html')
     else :
-        id = request.form.get("id")
+        memberid = request.form.get("memberid")
         password = request.form.get("password")
-        SQL = "SELECT * FROM XMEMBER where memberid = '{0}' and password = {1}".format(id,password)
+        password = encrypt_pw(memberid,password)
+        SQL = "SELECT * FROM XMEMBER where memberid = '{0}' and password = '{1}'".format(memberid,password)
         conn = DB('dict')
         result = conn.select_all(SQL,None)
         if len(result)!=0:
@@ -30,6 +32,7 @@ def user_join_service():
     else:
         memberid=request.form.get("memberid")
         password=request.form.get("password")
+        password = encrypt_pw(memberid,password)
         telphone=request.form.get("telphone")
         groupid=request.form.get("groupid")
         name=request.form.get("name")
@@ -46,3 +49,8 @@ def user_join_service():
 
 def user_profile_service():
     return render_template('/user/profile.html')
+
+def encrypt_pw(id, password):
+    password = password+id
+    password = hashlib.sha256(password.encode()).hexdigest()
+    return password

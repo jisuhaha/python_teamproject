@@ -5,7 +5,21 @@ def user_main_service():
     return render_template('/user/main.html')
 
 def user_login_service():
-    return render_template('/user/login.html')
+    if request.method=='GET':
+        return render_template('/user/login.html')
+    else :
+        id = request.form.get("id")
+        password = request.form.get("password")
+        SQL = "SELECT * FROM XMEMBER where memberid = '{0}' and password = {1}".format(id,password)
+        conn = DB('dict')
+        result = conn.select_all(SQL,None)
+        if len(result)!=0:
+            return render_template('/user/main.html', user=result)
+        else:
+            return render_template('/user/login.html')
+            
+
+
 
 def user_join_service():
     if request.method=='GET':

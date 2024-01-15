@@ -6,7 +6,7 @@ class DB:
       host='localhost',
       user='board',
       password='boardqwe!@#',
-      db='flask',
+      db='python_teamproject',
       charset='utf8',
       autocommit=True,
     )

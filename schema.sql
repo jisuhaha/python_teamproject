@@ -62,6 +62,14 @@ grant all privileges on python_teamproject.* TO 'board'@'%';
 
 use python_teamproject;
 
+DROP TABLE IF EXISTS xGroup;
+create table xGroup(
+	oid			INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	groupname 	varchar(30),
+	status		VARCHAR(2),
+	createdate	date
+)default character set utf8 collate utf8_general_ci;
+
 DROP TABLE IF EXISTS xMember;
 create table xMember(
     oid         INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -70,20 +78,22 @@ create table xMember(
     groupName	varchar(24),
     groupid		INT,
     telphone	varchar(13),
+    email       varchar(45),
     name 		VARCHAR(10),
     status		VARCHAR(2),
     carnum		varchar(40),
     carinfo		varchar(10),
-    createdate	date
+    createdate	date,
+    FOREIGN KEY(groupid) REFERENCES xGroup(oid)
 )default character set utf8 collate utf8_general_ci;
 
 
-DROP TABLE IF EXISTS xGroup;
-create table xGroup(
-	oid			INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	groupname 	varchar(30),
-	status		VARCHAR(2),
-	createdate	date
+
+DROP TABLE IF EXISTS loadingpoint;
+CREATE TABLE loadingpoint(
+	oid	INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	name	VARCHAR(100),
+	address	varchar(200)
 )default character set utf8 collate utf8_general_ci;
 
 DROP TABLE IF EXISTS board;
@@ -96,7 +106,9 @@ create table board(
 	reservetime		DATE,
 	loadingtime		DATE,
 	loadingoid		INT,
-	unloadingoid	int
+	unloadingoid	INT,
+    FOREIGN KEY(loadingoid) REFERENCES loadingpoint(oid),
+    FOREIGN KEY(unloadingoid) REFERENCES loadingpoint(oid)
 )default character set utf8 collate utf8_general_ci;
 
 DROP TABLE IF EXISTS cost;
@@ -108,12 +120,7 @@ create table cost(
     loadingcost	INT,
     staycost		INT,
     othercost		INT,
-    stuats VARCHAR(2)
+    stuats VARCHAR(2),
+    FOREIGN KEY(boardoid) REFERENCES board(oid)
 )default character set utf8 collate utf8_general_ci;
 
-DROP TABLE IF EXISTS loadingpoint;
-CREATE TABLE loadingpoint(
-	oid	INT,
-	name	VARCHAR(100),
-	address	varchar(200)
-)default character set utf8 collate utf8_general_ci;

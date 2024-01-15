@@ -1,6 +1,11 @@
 from flask import Flask, render_template, request, jsonify
+from app.route.board_route import board_page
+from app.route.user_route import user_page
 
 app = Flask(__name__)
+
+app.register_blueprint(board_page)
+app.register_blueprint(user_page)
 
 @app.route('/')
 def home():
@@ -9,16 +14,3 @@ def home():
 @app.route('/login')
 def login():
     return render_template('login.html')
-
-@app.route('/call/<param>')
-def get_echo(param):
-    if request.method=='GET':
-        return jsonify({'param':param})
-
-@app.route('/call',methods=['POST'])
-def post_call():
-    req_json = request.get_json()
-    print(type(req_json))
-    print(req_json)
-    return jsonify(req_json)
-

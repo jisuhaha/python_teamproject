@@ -76,7 +76,7 @@ DROP TABLE IF EXISTS xGroup;
 create table xGroup(
 	oid			INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	groupname 	varchar(30),
-	status		VARCHAR(2),
+	status		VARCHAR(2),        #MJ 고객사의 상태는 중요치 않은것으로 판단됨 
 	createdate	date
 )default character set utf8 collate utf8_general_ci;
 

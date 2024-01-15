@@ -105,6 +105,8 @@ create table cost(
     stuats VARCHAR(2)
 )default character set utf8 collate utf8_general_ci;
 
+
+
 DROP TABLE IF EXISTS loadingpoint;
 CREATE TABLE loadingpoint(
 	oid	INT,

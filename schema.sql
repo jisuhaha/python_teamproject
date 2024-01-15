@@ -32,20 +32,14 @@ systemid oid	int pk
 업체명	groupname	varchar(30) group.groupname 
 상차일	loadingdate	date
 하차일	unloadingdate	date
-예약시간	reservetime	date
 상차시간	loadingtime	date
 상차지	loadingoid	int	loadingpoint.oid
 하차지	unloadingoid	int	loadingpoint.oid
+무게    weight_t      int   >> 톤당 1만원 
+거리    distance_km    int  >>  10km 당 1만원
 
-cost
-systemid	oid	int	pk
-board참조 boardoid	int 
-기본비용 defaultcost	int
-수작업비	laborcost		int
-전일상차	loadingcost	int
-대기비	staycost		int
-기타비용	othercost		int
-상태 (지급 or 청구)	stuats varchar2
+
+
 
 loadingpoint
 systemid 	oid	int
@@ -62,14 +56,6 @@ grant all privileges on python_teamproject.* TO 'board'@'%';
 
 use python_teamproject;
 
-DROP TABLE IF EXISTS xGroup;
-create table xGroup(
-	oid			INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	groupname 	varchar(30),
-	status		VARCHAR(2),
-	createdate	date
-)default character set utf8 collate utf8_general_ci;
-
 DROP TABLE IF EXISTS xMember;
 create table xMember(
     oid         INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -78,22 +64,20 @@ create table xMember(
     groupName	varchar(24),
     groupid		INT,
     telphone	varchar(13),
-    email       varchar(45),
     name 		VARCHAR(10),
     status		VARCHAR(2),
     carnum		varchar(40),
     carinfo		varchar(10),
-    createdate	date,
-    FOREIGN KEY(groupid) REFERENCES xGroup(oid)
+    createdate	date
 )default character set utf8 collate utf8_general_ci;
 
 
-
-DROP TABLE IF EXISTS loadingpoint;
-CREATE TABLE loadingpoint(
-	oid	INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	name	VARCHAR(100),
-	address	varchar(200)
+DROP TABLE IF EXISTS xGroup;
+create table xGroup(
+	oid			INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	groupname 	varchar(30),
+	status		VARCHAR(2),
+	createdate	date
 )default character set utf8 collate utf8_general_ci;
 
 DROP TABLE IF EXISTS board;
@@ -106,9 +90,7 @@ create table board(
 	reservetime		DATE,
 	loadingtime		DATE,
 	loadingoid		INT,
-	unloadingoid	INT,
-    FOREIGN KEY(loadingoid) REFERENCES loadingpoint(oid),
-    FOREIGN KEY(unloadingoid) REFERENCES loadingpoint(oid)
+	unloadingoid	int
 )default character set utf8 collate utf8_general_ci;
 
 DROP TABLE IF EXISTS cost;
@@ -120,7 +102,14 @@ create table cost(
     loadingcost	INT,
     staycost		INT,
     othercost		INT,
-    stuats VARCHAR(2),
-    FOREIGN KEY(boardoid) REFERENCES board(oid)
+    stuats VARCHAR(2)
 )default character set utf8 collate utf8_general_ci;
 
+
+
+DROP TABLE IF EXISTS loadingpoint;
+CREATE TABLE loadingpoint(
+	oid	INT,
+	name	VARCHAR(100),
+	address	varchar(200)
+)default character set utf8 collate utf8_general_ci;

@@ -1,4 +1,4 @@
-차량 출고 차고 time 담당자 금액  금액
+/* 차량 출고 차고 time 담당자 금액  금액
 등록 수정 삭제 조회
 paging 10
 
@@ -50,4 +50,70 @@ board참조 boardoid	int
 loadingpoint
 systemid 	oid	int
 지명	name	varchar(100)
-주소	address	varchar(200)
+주소	address	varchar(200) */
+
+
+
+
+create database python_teamproject default character set utf8 collate utf8_general_ci;
+
+create user 'board'@'%' identified by 'boardqwe!@#';
+grant all privileges on python_teamproject.* TO 'board'@'%';
+
+use python_teamproject;
+
+DROP TABLE IF EXISTS xMember;
+create table xMember(
+    oid         INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    memberid    varchar(16),
+    pssword		varchar(256),
+    groupName	varchar(24),
+    groupid		INT,
+    telphone	varchar(13),
+    name 		VARCHAR(10),
+    status		VARCHAR(2),
+    carnum		varchar(40),
+    carinfo		varchar(10),
+    createdate	date
+)default character set utf8 collate utf8_general_ci;
+
+
+DROP TABLE IF EXISTS xGroup;
+create table xGroup(
+	oid			INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	groupname 	varchar(30),
+	status		VARCHAR(2),
+	createdate	date
+)default character set utf8 collate utf8_general_ci;
+
+DROP TABLE IF EXISTS board;
+create table board(
+	oid				INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	groupOID			INT,
+	groupname		varchar(30),
+	loadingdate		DATE,
+	unloadingdate	DATE,
+	reservetime		DATE,
+	loadingtime		DATE,
+	loadingoid		INT,
+	unloadingoid	int
+)default character set utf8 collate utf8_general_ci;
+
+DROP TABLE IF EXISTS cost;
+create table cost(
+    oid				INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    boardoid		INT,
+    defaultcost	INT,
+    laborcost		INT,
+    loadingcost	INT,
+    staycost		INT,
+    othercost		INT,
+    stuats VARCHAR(2)
+)default character set utf8 collate utf8_general_ci;
+
+DROP TABLE IF EXISTS loadingpoint;
+CREATE TABLE loadingpoint(
+	oid	INT,
+	name	VARCHAR(100),
+	address	varchar(200)
+)default character set utf8 collate utf8_general_ci;

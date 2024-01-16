@@ -1,4 +1,4 @@
-from flask import render_template, request, jsonify, make_response,redirect, url_for
+from flask import render_template, request,session
 from app.db import DB
 import hashlib
 #from flask_jwt_extended import create_access_token, set_access_cookies, create_refresh_token
@@ -17,14 +17,10 @@ def user_login_service():
         conn = DB('dict')
         result = conn.select_all(SQL,None)
         if len(result)==0:
-            #return jsonify({"login": False}), 401
             return render_template('/user/login.html')
         else:
-            #access_token = create_access_token(identity=memberid)
-            #response = make_response({'login': True})
-            #set_access_cookies(response, access_token)
-            #return response
-            #return jsonify({"access_token": access_token})
+            session['userInfo'] = result
+            #print(session['userInfo'][0].get('memberid'))
             return render_template('/user/main.html', user=result)
 
 def user_join_service():
@@ -46,7 +42,6 @@ def user_join_service():
         SQL = '''INSERT INTO XMEMBER 
         (memberid, PASSWORD, telphone, groupid, NAME, carnum, carinfo, STATUS, groupname, createdate)
         VALUES('{0}','{1}','{2}',{3},'{4}','{5}','{6}','{7}', (select groupname from xgroup where oid={3}), now() )'''.format(memberid, password, telphone, groupid, name, carnum, carinfo, status)
-        print(SQL)
         conn = DB('dict')
         groups = conn.save_one(SQL,None)
         return render_template('/user/join.html')

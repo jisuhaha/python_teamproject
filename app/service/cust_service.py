@@ -15,17 +15,18 @@ def cust_price_service():
     return result[0].get("DISTANCE")
 def cust_reg_service():
     if request.method=='POST':
+        SQL = 'SELECT * FROM board WHERE STATUS = \'a\''
+        conn = DB('dict')
+        groups = conn.save_one(SQL,None)
         loadingdate = request.form.get["loadingdate"] 
         groupname = request.form.get["xGroup.groupname"]
+        name = request.form.get["startpoint.name"]
         
         
         
         
         
         
-        #SQL = 'SELECT oid, groupname FROM bo WHERE STATUS = \'a\''
-        #conn = DB('dict')
-        #groups = conn.save_one(SQL,None)
         return render_template('/user/join.html',groups=groups)
 
     else:

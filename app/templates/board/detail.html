@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>운송 정보 자세히 </title>
+    
+    <script type="text/javascript">
+        function hide(thing){
+          var elem = document.getElementById(thing);
+          elem.style.display = 'none';
+        }   
+        function show(thing){
+          var elem = document.getElementById(thing);
+          elem.style.display = 'block';
+        }
+        function CalendarSelectHandler(select){
+        if(select.value == 'driver_name'){
+            show('text_form_id');
+            hide('date_search_id');
+        } else {
+            hide('text_form_id');
+            show('date_search_id');
+        }}
+        
+        // body에 적용해서 첫 로딩시에 검색창 숨기기
+        function hide_default(){
+            document.getElementById('text_form_id').style.display='none';
+        }
+    </script>
+
+</head>
+<!-- onload='hide_default()' -->
+<body onload='hide_default()'>    
+    <table border = 1>
+        <tr>
+            <th> 작업 번호 </th>
+            <td> 출발지 </td>
+            <td> 도착지 </td>
+            <td> 출발일 </td>
+            <td> 도착일 </td>
+            <td> 기본요금 </td>
+            <td> 수작업요금 </td>
+            <td> 전일상차요금 </td>
+            <td> 대기요금 </td>
+            <td> 기타요금 </td>
+            <td> 상태 </td>
+        </tr>
+        {% for row in data: %}
+            <tr>
+                <th>
+                    {{row['board_id']}}
+                </th>
+                <td>
+                    {{row['departure_point']}}
+                </td>
+                <td>
+                    {{row['arrival_point']}}
+                </td>
+                <td>
+                    {{row['departure_date']}}
+                </td>
+                <td>
+                    {{row['arrival_date']}}
+                </td>
+                <td>
+                    {{row['default_cost']}}
+                </td>
+                <td>
+                    {{row['labor_cost']}}
+                </td>
+                <td>
+                    {{row['loading_cost']}}
+                </td>
+                <td>
+                    {{row['stay_cost']}}
+                </td>
+                <td>
+                    {{row['other_cost']}}
+                </td>
+                <td>
+                    {{row['status']}}
+                </td>
+            </tr>
+        {% endfor %}  
+    </table>
+
+    <form action="/cust_info" method="post">
+        <p>
+        <select name="select_search" onchange="CalendarSelectHandler(this)">
+            <option value="departure_date">시작일</option>
+            <option value="arrival_date">종료일</option>
+            <option value="driver_name">운전 담당자</option>
+        </select>
+
+        
+        <p id="date_search_id">
+            <input type="date" name="date_search">
+        </p>
+        <p id="text_form_id">
+            <input type="text" name="text_form">
+        </p>
+        <input type="submit" value="검색" name="search_button">
+        
+
+        </p>
+    </form>
+
+</body>
+</html>

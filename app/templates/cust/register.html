@@ -7,7 +7,7 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
-    <form action="{{url_for('cust_page.cust-db_service')}}" method="post">
+    <form action="{{url_for('cust_page.cust_reg_service')}}" method="post">
     <dl>
 
         <dt>요청일시</dt>
@@ -19,19 +19,19 @@
     </dl>
     <dl>
         <dt>상차지명</dt>
-        <input id="start_name" type='text' name="loadingpoint.name", placeholder="상차지명",required>
+        <input id="start_name" type='text' name="startpoint.name", placeholder="상차지명",required>
     </dl>
     <dl>
         <dt>상차지 주소</dt>
-        <input id="start_point" type='text' name="loadingpoint.address", placeholder="상차지 주소",required>
+        <input id="start_point" type='text' name="startpoint.address", placeholder="상차지 주소",required>
     </dl>
     <dl>
         <dt>하차지명</dt>
-        <input id="start_name" type='text' name="loadingpoint.name", placeholder="하차지명",required>
+        <input id="start_name" type='text' name="end.name", placeholder="하차지명",required>
     </dl>
     <dl>
         <dt>하차지 주소</dt>
-        <input id="end_point" type='text' name="loadingpoint.address", placeholder="하차지 주소", required>
+        <input id="end_point" type='text' name="endpoint.address", placeholder="하차지 주소", required>
     </dl>
     <dl>
         <dt>요청 차종</dt>

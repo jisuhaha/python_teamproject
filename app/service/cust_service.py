@@ -14,5 +14,20 @@ def cust_price_service():
     print(result[0].get("DISTANCE"))
     return result[0].get("DISTANCE")
 def cust_reg_service():
-    print('111')
-    return render_template('/cust/register.html')
+    if request.method=='POST':
+        loadingdate = request.form.get["loadingdate"] 
+        groupname = request.form.get["xGroup.groupname"]
+        
+        
+        
+        
+        
+        
+        #SQL = 'SELECT oid, groupname FROM bo WHERE STATUS = \'a\''
+        #conn = DB('dict')
+        #groups = conn.save_one(SQL,None)
+        return render_template('/user/join.html',groups=groups)
+
+    else:
+        return render_template('/cust/register.html')
+

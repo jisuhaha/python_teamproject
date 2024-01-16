@@ -22,7 +22,7 @@
 <Xmember>  -- 회원가입시 입력되는 정보가 저장되는 DB
 systemid    oid		    int	pk              // index용
 memberid	id  	    varchar16           // 사용자 아이디
-PW	        password	varchar256
+PW	        pssword	varchar256
 연락처	    telphone	varchar13
 이름	    name 		varchar24           // 기사이름 또는 고객사명
 등급	    grade		varchar2            // 00 : 관리자 , 10 : 기사, 20 : 고객사
@@ -46,6 +46,7 @@ systemid        oid	            int pk              // index용
 상차지          loadingpoint    varchar(10)
 하차지          unloadingpoint  varchar(10)
 운송거리        distance_km     int
+거리운임        distance_cost   int
 // 운송거리 값을 기준으로 10km 당 1만원으로 책정
  {운송거리계산}
     서울 -> 인천(20km), 대전(150km), 울산(300km) ,대구(250km), 광주(350km), 부산(400km)
@@ -71,3 +72,7 @@ systemid 	oid	        int
 1. xgroup 테이블 삭제 -> xmember 테이블에 해당 내용을 포함하여 작성
 2. cost 테이블 삭제 -> distance_loc 테이블에 운송거리 계산표를 통하여 운송거리를 작성하고
     board에 있는 요청차량의 t수에 따라 운임 계산
+3. xmember 에서 groupName, groupid, email, createdate 은 삭제, 
+   status -> grade로 carnum -> info로 변경, 외래키 삭제(groupid)
+4. board 테이블에서 reservetime, loadingdate 삭제, unloadingdate -> unloadintdate, 변경
+    weight_t 추가

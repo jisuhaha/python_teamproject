@@ -15,7 +15,7 @@ create table xMember(
     name 		VARCHAR(10),
     grade		VARCHAR(2),
     info		varchar(40),
-    carinfo		varchar(10),
+    carinfo		varchar(10)
 )default character set utf8 collate utf8_general_ci;
 
 

@@ -1,6 +1,7 @@
 from flask import render_template, request,session
+from flask_paginate import Pagination, get_page_args
 from app.db import DB
-import hashlib
+import hashlib, pymysql
 #from flask_jwt_extended import create_access_token, set_access_cookies, create_refresh_token
 
 def user_main_service():
@@ -51,18 +52,34 @@ def user_profile_service():
     return render_template('/user/profile.html')
 
 def user_manage_service():
-    page = request.args.get('page', 1, type=int)
     per_page = 10
-
-    PAGING_SQL = "select (count(0)/10) as max_page from xmember"
-    conn = DB('dict')
-    max_page = conn.select_one(PAGING_SQL)
-    print(max_page)
+    page = request.args.get('page', 1, type=int)
+    page, _, offset = get_page_args(per_page=per_page)
+    dbcon = DB('dict')
+    cur = dbcon.cur
+    cur.execute("select count(0) as page from XMEMBER")
+    total = cur.fetchone().get('page')
+    cur.execute(
+        "SELECT * FROM XMEMBER" 
+        " LIMIT %s OFFSET %s;", 
+        (per_page, offset),
+    )
+    posts = cur.fetchall()
+    cur.close()
 
     SQL = "SELECT * FROM XMEMBER LIMIT %s OFFSET %s"
     conn = DB('dict')
     result = conn.select_all(SQL,(per_page, (page-1)*per_page))
-    return render_template('/user/manage.html' ,users=result)
+    return render_template('/user/manage.html' ,users=posts, pagination=Pagination(
+            page=page,
+            total=total,
+            per_page=per_page,
+            prev_label="<<",
+            next_label=">>",
+            format_total=True,
+        ),
+        search=True
+                           )
 
 def encrypt_pw(id, password):
     password = password+id

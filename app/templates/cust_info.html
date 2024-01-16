@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>고객사 운송 정보</title>
+    
+    <script type="text/javascript">
+        function hide(thing){
+          var elem = document.getElementById(thing);
+          elem.style.display = 'none';
+        }   
+        function show(thing){
+          var elem = document.getElementById(thing);
+          elem.style.display = 'block';
+        }
+        function CalendarSelectHandler(select){
+        if(select.value == 'driver_name'){
+            show('text_form_id');
+            hide('date_search_id');
+        } else {
+            hide('text_form_id');
+            show('date_search_id');
+        }}
+        
+        // body에 적용해서 첫 로딩시에 검색창 숨기기
+        function hide_default(){
+            document.getElementById('text_form_id').style.display='none';
+        }
+    </script>
+
+</head>
+<!-- onload='hide_default()' -->
+<body onload='hide_default()'>    
+    <table border = 1>
+        <tr>
+            <th> 작업 번호 </th>
+            <td> 시작일 </td>
+            <td> 종료일 </td>
+            <td> 운전 담당자 </td>
+        </tr>
+        {% for i in cust: %}
+            <tr>
+                <th>
+                    <a href = "/work_list/{{i['work_id']}}"> {{i['work_id']}}</a>
+                </th>
+                <td>
+                    {{i['start_date']}}
+                </td>
+                <td>
+                    {{i['finish_date']}}
+                </td>
+                <td>
+                    {{i['driver_name']}}
+                </td>
+            </tr>
+        {% endfor %}  
+    </table>
+
+    <form action="/cust_info" method="post">
+        <p>
+        <select name="select_search" onchange="CalendarSelectHandler(this)">
+            <option value="start_date">시작일</option>
+            <option value="finish_date">종료일</option>
+            <option value="driver_name">운전 담당자</option>
+        </select>
+
+        
+        <p id="date_search_id">
+            <input type="date" name="date_search">
+        </p>
+        <p id="text_form_id">
+            <input type="text" name="text_form">
+        </p>
+        <input type="submit" value="검색" name="search_button">
+        
+
+        </p>
+    </form>
+
+</body>
+</html>

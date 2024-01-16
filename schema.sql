@@ -87,10 +87,12 @@ create table board(
 	groupname		varchar(30),
 	loadingdate		DATE,
 	unloadingdate	DATE,
-	reservetime		DATE,
-	loadingtime		DATE,
-	loadingoid		INT,
-	unloadingoid	int
+--	reservetime		DATE,   #MJ 불필요
+--	loadingtime		DATE,   #MJ 불필요
+	loadingoid		INT NOT NULL,    -- loadingpoint.name
+	unloadingoid	int NOT NULL,     -- loadingpoint.name  
+    weight_t        INT,              -- 화물무게
+--  distance_km     int                -- 운송거리
 )default character set utf8 collate utf8_general_ci;
 
 DROP TABLE IF EXISTS cost;

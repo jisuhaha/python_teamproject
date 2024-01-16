@@ -1,6 +1,0 @@
-insert into board values 
-    (
-
-
-
-

@@ -50,6 +50,20 @@ def user_join_service():
 def user_profile_service():
     return render_template('/user/profile.html')
 
+def user_manage_service():
+    page = request.args.get('page', 1, type=int)
+    per_page = 10
+
+    PAGING_SQL = "select (count(0)/10) as max_page from xmember"
+    conn = DB('dict')
+    max_page = conn.select_one(PAGING_SQL)
+    print(max_page)
+
+    SQL = "SELECT * FROM XMEMBER LIMIT %s OFFSET %s"
+    conn = DB('dict')
+    result = conn.select_all(SQL,(per_page, (page-1)*per_page))
+    return render_template('/user/manage.html' ,users=result)
+
 def encrypt_pw(id, password):
     password = password+id
     password = hashlib.sha256(password.encode()).hexdigest()

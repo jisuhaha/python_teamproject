@@ -8,4 +8,5 @@ user_page.add_url_rule("/", methods=['GET','POST'], view_func=user_login_service
 user_page.add_url_rule("/login", methods=['GET','POST'], view_func=user_login_service)
 user_page.add_url_rule("/join", methods=['GET','POST'], view_func=user_join_service)
 user_page.add_url_rule("/profile", methods=['GET','POST'], view_func=user_profile_service)
+user_page.add_url_rule("/manage", methods=['GET','POST'], view_func=user_manage_service)
 

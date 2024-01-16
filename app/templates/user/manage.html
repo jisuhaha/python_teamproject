@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/manage.css')}}">
+</head>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>OID</th>
+                <th>아이디</th>
+                <th>연락처</th>
+                <th>이름</th>
+                <th>유형</th>
+                <th>고객사주소/차량번호</th>
+                <th>차량정보</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{user.oid}}</td>
+                <td>{{user.memberid}}</td>
+                <td>{{user.telphone}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.grade}}</td>
+                <td>{{user.info}}</td>
+                <td>{{user.carinfo}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+</html>

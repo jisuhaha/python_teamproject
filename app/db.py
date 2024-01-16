@@ -40,3 +40,10 @@ class DB:
     self.cur.close()
     self.con.close()
     return result
+  
+  def save_one_getid(self, sql, args=None):
+    self.cur.execute(sql, args)
+    result = self.cur.lastrowid
+    self.cur.close()
+    self.con.close()
+    return result

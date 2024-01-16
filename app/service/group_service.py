@@ -3,7 +3,9 @@ from app.db import DB
 import hashlib
 #from flask_jwt_extended import create_access_token, set_access_cookies, create_refresh_token
 
+
 def group_main_service():
+    print('='*30)
     # 아직 고객사 고르는 방법을 구현하지 않았기 때문에 고객사 id는 1로 적어둠.
     SQL = f'''SELECT
     b.oid as board_id, 
@@ -22,7 +24,7 @@ def group_main_service():
     return render_template('/group/main.html', data = result)
 
 
-def group_detail():
+def group_detail_service():
     # 아직 고객사 고르는 방법을 구현하지 않았기 때문에 고객사 id는 1로 적어둠.
     SQL = f'''SELECT
     b.oid as board_id, 

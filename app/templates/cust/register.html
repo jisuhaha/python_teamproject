@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>고객사 등록</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+    <form>
+    <d1>
+        <dt>요청일시</dt>
+        <input type="date" name="loadindate">
+    </d1>
+    <d1>
+        <dt>업체명</dt>
+        <input type='text' name="xGroup.groupname", placeholder="업체명", required>
+    </d1>
+    <d1>
+        <dt>상차지</dt>
+        <input id="start_point" type='text' name="loadingpoint.address", placeholder="상차지",required>
+    </d1>
+    <d1>
+        <dt>하차지</dt>
+        <input id="end_point" type='text' name="loadingpoint.address", placeholder="하차지", required>
+    </d1>
+    <d1>
+        <dt>요청 차종</dt>
+        <select id="carinfo" name="optionlist[]" onchange="change_option(this, 'basic');" label="COLOR" opt_type="SELECT" opt_id="1" opt_mix="Y" require="Y" opt_mandatory="Y" class="basic_option">
+        
+            <option value="" selected disabled hidden>차종을 선택해주세요.</option>
+
+            <option value="다마스/라보">다마스/라보</option>
+                
+            <option value="1톤">1톤</option>
+                
+            <option value="1.4톤">1.4톤</option>
+                
+            <option value="2,5톤">2.5톤</option>
+                
+            <option value="3.5톤">3.5톤</option>
+                
+            <option value="3.5톤 광폭">3.5톤 광폭</option>
+                
+            <option value="5톤">5톤</option>
+        
+            <option value="5톤 축">5톤 축</option>
+
+            <option value="11톤">11톤</option>
+
+            <option value="11톤 축">11톤 축</option>
+            </select>
+    </d1>
+    </form>
+    <d1>
+        <dt>요금</dt>
+        <button id="myButton" onclick="hideButton()">요금 정산</button>
+        <p id="pricevalue" style="display: none"></p>
+
+    <script>
+        function hideButton() {
+            var button = document.getElementById("myButton");
+            var carinfo = document.getElementById("carinfo");
+            var start = document.getElementById("start_point");
+            var end = document.getElementById("end_point");
+            $.ajax({
+                    url: '/cust/price',
+                    type: 'GET',
+                    dataType: 'text',
+                    data: {'carinfo' : carinfo.value, 'start' : start.value , 'end':end.value},
+                    success: function(response) {
+                        // Handle the successful response
+                        $('#result').text('Response from server: ' + response.message);
+                        var priceElement = document.getElementById("pricevalue");
+                        priceElement.style.display = "block";
+                        priceElement.innerText=response
+                    },
+                    error: function(error) {
+                        // Handle any errors
+                        console.error('Error:', error);
+                    }
+                });
+
+            button.style.display = "none";
+
+        }
+    </script>
+        
+    </d1>
+</body>
+</html>
+
+
+

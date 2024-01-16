@@ -44,9 +44,9 @@ create table board(
 
 DROP TABLE IF EXISTS distance_loc;
 create table distance_loc(
-    oid              int not null AUTO_INCREMENT PRIMARY key,
-	loadingpoint     varchar(10),
+    loadingpoint     varchar(10),
     unloadingpoint   varchar(10),
-    distance_km      int
+    distance_km      int,
+    distance_cost    int
 )default character set utf8 collate utf8_general_ci;
 

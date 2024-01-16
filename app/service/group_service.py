@@ -5,7 +5,6 @@ import hashlib
 
 
 def group_main_service():
-    print('='*30)
     # 아직 고객사 고르는 방법을 구현하지 않았기 때문에 고객사 id는 1로 적어둠.
     SQL = f'''SELECT
     b.oid as board_id, 
@@ -16,11 +15,11 @@ def group_main_service():
     from xGroup g
     inner join board b on g.oid = b.groupOID
     inner join loadingpoint l on b.loadingoid = l.oid
-    inner join loadingpoint ul on b.unloadingoid = ul.oid
-    where g.oid = 1;
+    inner join loadingpoint ul on b.unloadingoid = ul.oid;
     '''
     conn = DB('dict')
     result = conn.select_all(SQL,None)
+
     return render_template('/group/main.html', data = result)
 
 
@@ -42,8 +41,7 @@ def group_detail_service():
     inner join board b on g.oid = b.groupOID
     inner join loadingpoint l on b.loadingoid = l.oid
     inner join loadingpoint ul on b.unloadingoid = ul.oid
-    inner join cost c on c.boardoid = b.oid
-    where g.oid = 1 
+    inner join cost c on c.boardoid = b.oid; 
     '''
     if request.method == 'POST':
         select_switch = request.form['select_search']
@@ -54,10 +52,10 @@ def group_detail_service():
         if date_value == '' and text_form == '':
             pass
         elif select_switch == 'start_date':
-            SQL += f'''and b.loadingdate = "{date_value}"'''
+            SQL += f'''where b.loadingdate = "{date_value}"'''
         
         elif select_switch == 'finish_date':
-            SQL += f'''and b.unloadingdate = "{date_value}"'''
+            SQL += f'''where b.unloadingdate = "{date_value}"'''
 
         # # 현재 운전자 정보가 없음..
         # elif select_switch == 'driver_name':

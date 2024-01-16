@@ -45,7 +45,7 @@ board참조 boardoid	int
 전일상차	loadingcost	int
 대기비	staycost		int
 기타비용	othercost		int
-상태 (지급 or 청구)	stuats varchar2
+상태 (지급 or 청구)	status varchar2
 
 loadingpoint
 systemid 	oid	int
@@ -120,7 +120,7 @@ create table cost(
     loadingcost	INT,
     staycost		INT,
     othercost		INT,
-    stuats VARCHAR(2),
+    status VARCHAR(2),
     FOREIGN KEY(boardoid) REFERENCES board(oid)
 )default character set utf8 collate utf8_general_ci;
 

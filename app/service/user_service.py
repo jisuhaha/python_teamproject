@@ -91,7 +91,7 @@ def user_manage_service():
         return '불가능한 접근입니다'
 
 
-def encrypt_pw(id, password):
-    password = password+id
-    password = hashlib.sha256(password.encode()).hexdigest()
-    return password
+#def encrypt_pw(id, password):
+    #password = password+id
+    #password = hashlib.sha256(password.encode()).hexdigest()
+    #return password

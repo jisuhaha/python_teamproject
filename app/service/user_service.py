@@ -1,4 +1,4 @@
-from flask import render_template, request,session, redirect
+from flask import render_template, request,session, redirect, url_for
 from flask_paginate import Pagination, get_page_args
 from app.db import DB
 import hashlib, pymysql
@@ -25,7 +25,7 @@ def user_login_service():
             if session['userInfo'][0].get('grade')=='10':
                 return render_template('/user/main.html', user=result)
             elif session['userInfo'][0].get('grade')=='20':
-                return cust_table_service()
+                return redirect(url_for('cust_page.cust_table_service'))
             else :
                 return render_template('/user/main.html', user=result)
 

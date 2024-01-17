@@ -37,9 +37,8 @@ def cust_reg_service():
         board_sql = '''insert into board(groupoid, groupname, loadingtime, unloadingtime, loadingoid, unloadingoid, weight_t, cost ) values 
         ('{0}','{1}',%s,%s,'{2}','{3}','{4}',{5})'''.format(session['userInfo'][0].get('oid'), groupname, start_id, end_id,carinfo, cost)
         conn = DB('dict')
-        print(board_sql)
-        groups = conn.save_one(board_sql,(loadingtime_obj,unloadingtime_obj))
-        return cust_table_service()
+        conn.save_one(board_sql,(loadingtime_obj,unloadingtime_obj))
+        return redirect(url_for('cust_page.cust_table_service'))
     else:
         return render_template('/cust/register.html')
 

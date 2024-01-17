@@ -10,11 +10,12 @@ def cust_price_service():
     carinfo = request.args["carinfo"]
     start = request.args["start"][0:2]
     end = request.args["end"][0:2]
-    SQL = "SELECT DISTANCE FROM DISTANCE_LOC WHERE LOADINGPOINT = '{0}' AND UNLOADINGPOINT = '{1}' ".format(start,end)
+    
+    SQL = "SELECT (DISTANCE*1000) as DISTANCE FROM DISTANCE_LOC WHERE LOADINGPOINT = '{0}' AND UNLOADINGPOINT = '{1}' ".format(start,end)
     conn = DB('dict')
     result = conn.select_all(SQL,None)
-    result = str(result[0].get("DISTANCE"))
-    return result
+    result = result[0].get("DISTANCE") + int(carinfo)*10000
+    return str(result)
 
 
 def cust_reg_service():
@@ -42,7 +43,7 @@ def cust_reg_service():
         print(board_sql)
         groups = conn.save_one(board_sql,(loadingtime_obj,unloadingtime_obj))
         logs.logger.info(f'고객사 운송 정보가 입력되었습니다. - {groupname}')   
-        return cust_table_service()
+        return redirect(url_for('cust_page.cust_table_service'))
     else:
         return render_template('/cust/register.html')
 

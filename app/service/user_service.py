@@ -90,6 +90,9 @@ def user_manage_service():
     else:
         return '불가능한 접근입니다'
 
+def user_logout_service():
+    session.pop('userInfo', None)
+    return redirect(url_for('user_page.user_login_service'))
 
 #def encrypt_pw(id, password):
     #password = password+id

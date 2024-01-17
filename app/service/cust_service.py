@@ -42,7 +42,7 @@ def cust_reg_service():
         print(board_sql)
         groups = conn.save_one(board_sql,(loadingtime_obj,unloadingtime_obj))
         logs.logger.info(f'고객사 운송 정보가 입력되었습니다. - {groupname}')   
-        return cust_table_service()
+        return redirect(url_for('cust_page.cust_table_service'))
     else:
         return render_template('/cust/register.html')
 

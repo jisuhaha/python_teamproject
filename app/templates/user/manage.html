@@ -5,14 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="{{url_for('static',filename='css/manage.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/table.css')}}">
 </head>
 
 <body>
-    <table>
+    <table class="container">
         <thead>
             <tr>
-                <th>OID</th>
                 <th>아이디</th>
                 <th>연락처</th>
                 <th>이름</th>
@@ -24,7 +23,6 @@
         <tbody>
             {% for user in users %}
             <tr>
-                <td>{{user.oid}}</td>
                 <td>{{user.memberid}}</td>
                 <td>{{user.telphone}}</td>
                 <td>{{user.name}}</td>
@@ -35,8 +33,9 @@
             {% endfor %}
         </tbody>
     </table>
+
     <div id="page-div">
-    {{ pagination.links | safe }}
+        {{ pagination.links | safe }}
     </div>
 </body>
 

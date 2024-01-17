@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS xMember;
 create table xMember(
     oid         INT      NOT NULL AUTO_INCREMENT PRIMARY KEY,
     memberid    varchar(16),
-    pssword		varchar(256),
+    password		varchar(256),
     telphone	varchar(13),
     name 		VARCHAR(10),
     grade		VARCHAR(2),
@@ -32,13 +32,13 @@ create table board(
 	oid				INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	groupOID			INT,
 	groupname		varchar(30),
-	loadingtime		DATE,
-	unloadingtime	DATE,
+	loadingtime		DATETIME,
+	unloadingtime	DATETIME,
 	loadingoid		INT,
 	unloadingoid	INT,
     weight_t        int,
     cost            int,
-    driverid        varchar(10)   
+    driverid        varchar(10),   
     FOREIGN KEY(loadingoid) REFERENCES loadingpoint(oid),
     FOREIGN KEY(unloadingoid) REFERENCES loadingpoint(oid)
 )default character set utf8 collate utf8_general_ci;

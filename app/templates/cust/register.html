@@ -6,34 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>고객사 등록</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script>
-        function hideButton() {
-            var button = document.getElementById("myButton");
-            var carinfo = document.getElementById("carinfo");
-            var start = document.getElementById("start_point");
-            var end = document.getElementById("end_point");
-            $.ajax({
-                url: '/cust/price',
-                type: 'GET',
-                dataType: 'text',
-                data: { 'carinfo': carinfo.value, 'start': start.value, 'end': end.value },
-                success: function (response) {
-                    // Handle the successful response
-                    $('#result').text('Response from server: ' + response.message);
-                    var priceElement = document.getElementById("pricevalue");
-                    document.getElementById("hiddenPrice").value=response;
-                    priceElement.style.display = "block";
-                    priceElement.innerText = response
-                },
-                error: function (error) {
-                    // Handle any errors
-                    console.error('Error:', error);
-                }
-            });
-
-            button.style.display = "none";
-        }
-    </script>
+    
 </head>
 
 <body>
@@ -41,11 +14,11 @@
         <dl>
 
             <dt>상차일</dt>
-            <input type="date" name="loadingdate">
+            <input type="datetime-local" name="loadingtime">
         </dl>
         <dl>
             <dt>하차일</dt>
-            <input type="date" name="unloadingdate">
+            <input type="datetime-local" name="unloadingtime">
         </dl>
         <dl>
             <dt>업체명</dt>
@@ -99,7 +72,7 @@
             <dt>요금</dt>
             <div onclick="hideButton()">요금 정산</div>
             <p id="pricevalue" style="display: none"></p>
-            <input type="hidden" name="price" id="hiddenPrice">
+            <input type="hidden" name="cost" id="cost">
         </dl>
         </dl>
 
@@ -108,5 +81,34 @@
         </dl>
     </form>
 </body>
+
+<script>
+    function hideButton() {
+        var button = document.getElementById("myButton");
+        var carinfo = document.getElementById("carinfo");
+        var start = document.getElementById("start_point");
+        var end = document.getElementById("end_point");
+        $.ajax({
+            url: '/cust/price',
+            type: 'GET',
+            dataType: 'text',
+            data: { 'carinfo': carinfo.value, 'start': start.value, 'end': end.value },
+            success: function (response) {
+                // Handle the successful response
+                $('#result').text('Response from server: ' + response.message);
+                var priceElement = document.getElementById("pricevalue");
+                document.getElementById("cost").value=response;
+                priceElement.style.display = "block";
+                priceElement.innerText = response+ '원'
+            },
+            error: function (error) {
+                // Handle any errors
+                console.error('Error:', error);
+            }
+        });
+
+        button.style.display = "none";
+    }
+</script>
 
 </html>

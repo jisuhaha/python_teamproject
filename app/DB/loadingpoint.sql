@@ -1,10 +1,10 @@
 insert into loadingpoint
 values
-(01, '서울', '서울 영등포구 양평동 4가');
+(01, '서울', '서울 영등포구 여의도동 여의대방로 359');
 
 insert into loadingpoint	
 values
-(02, '서울', '서울 중구 을지로 16길 5-5');
+(02, '서울', '서울 중구 소공로 51 ');
 
 insert into loadingpoint	
 values
@@ -44,7 +44,7 @@ values
 
 insert into loadingpoint	
 value
-(12, '대구', '대구 달성군 화원읍 사문진로 384');
+(12, '대구', '대구 달서구 성서로 255');
 
 insert into loadingpoint	
 values

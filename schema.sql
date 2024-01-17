@@ -38,7 +38,7 @@ create table board(
 	unloadingoid	INT,
     weight_t        int,
     cost            int,
-    driverid        varchar(10)   
+    driverid        varchar(10),   
     FOREIGN KEY(loadingoid) REFERENCES loadingpoint(oid),
     FOREIGN KEY(unloadingoid) REFERENCES loadingpoint(oid)
 )default character set utf8 collate utf8_general_ci;

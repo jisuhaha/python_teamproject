@@ -22,7 +22,7 @@
 <Xmember>  -- 회원가입시 입력되는 정보가 저장되는 DB
 systemid    oid		    int	pk              // index용
 memberid	id  	    varchar16           // 사용자 아이디
-PW	        pssword	varchar256
+PW	        password	varchar256
 연락처	    telphone	varchar13
 이름	    name 		varchar24           // 기사이름 또는 고객사명
 등급	    grade		varchar2            // 00 : 관리자 , 10 : 기사, 20 : 고객사

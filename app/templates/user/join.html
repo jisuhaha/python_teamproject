@@ -6,6 +6,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login Form</title>
   <link rel="stylesheet" href="{{url_for('static',filename='css/login.css')}}">
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $("input[name='grade']").change(function () {
+        // 기사 선택 시.
+        if ($("input[name='grade']:checked").val() == '10') {
+          console.log(111)
+          $('#info').attr("placeholder", "차량번호");
+          $('#carinfo').show();
+        }
+        // 고객사 선택 시.
+        else if ($("input[name='grade']:checked").val() == '20') {
+          console.log(222)
+          $('#carinfo').hide();
+          $('#info').attr("placeholder", "고객사주소");
+        }
+      });
+
+    });
+  </script>
 </head>
 
 <body>
@@ -19,7 +39,7 @@
             <div class="form sign-up">
               <div class="input-group">
                 <i class='bx bxs-user'></i>
-                <input type="text" name="m emberid" placeholder="아이디">
+                <input type="text" name="memberid" placeholder="아이디">
               </div>
               <div class="input-group">
                 <i class='bx bxs-lock-alt'></i>
@@ -34,26 +54,19 @@
                 <input type="text" name="telphone" placeholder="연락처">
               </div>
               <div class="input-group">
-                <select name="groupid" id="lang">
-                  {% for group in groups %}
-                    <option value="{{group.oid}}"> {{group.groupname}} </option>
-                  {% endfor %}
-                </select>
-              </div>
-              <div class="input-group">
                 <i class='bx bxs-lock-alt'></i>
                 <input type="text" name="name" placeholder="name">
               </div>
               <div class="input-group">
                 <i class='bx bxs-lock-alt'></i>
-                <input type="text" name="carnum" placeholder="차량번호">
+                <input id="info" type="text" name="info" placeholder="차량번호">
               </div>
               <div class="input-group">
                 <i class='bx bxs-lock-alt'></i>
-                <input type="text" name="carinfo" placeholder="차량정보">
+                <input id="carinfo" type="text" name="carinfo" placeholder="차량정보">
               </div>
-              <input type="radio" name="status" value="10">기사</label>
-              <input type="radio" name="status" value="20">고객사</label>
+              <input type="radio" name="grade" value="10" checked>기사</label>
+              <input type="radio" name="grade" value="20">고객사</label>
               <button>
                 Sign up
               </button>

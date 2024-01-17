@@ -173,7 +173,7 @@ h2 a {
 }
 
 .btn-gradient.blue {
-  background: rgba(102, 152, 203, 1);
+  background: rgb(40, 75, 110);
   background: -moz-linear-gradient(top, rgba(102, 152, 203, 1) 0%, rgba(92, 138, 184, 1) 100%);
   background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(102, 152, 203, 1)), color-stop(100%, rgba(92, 138, 184, 1)));
   background: -webkit-linear-gradient(top, rgba(102, 152, 203, 1) 0%, rgba(92, 138, 184, 1) 100%);

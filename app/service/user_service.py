@@ -4,7 +4,6 @@ from app.db import DB
 import hashlib, pymysql
 from app.service.cust_service import cust_table_service
 import logs.loggings as logs
-#from flask_jwt_extended import create_access_token, set_access_cookies, create_refresh_token
 
 def user_main_service():
     return render_template('/user/main.html')
@@ -35,8 +34,6 @@ def user_login_service():
                 logs.logger.info(f'{name} 관리자가 로그인 하였습니다.')
                 return redirect(url_for('user_page.user_manage_service'))
 
-            #print(session['userInfo'][0].get('memberid'))
-
 def user_join_service():
     if request.method=='GET':
         return render_template('/user/join.html')
@@ -55,7 +52,7 @@ def user_join_service():
         conn = DB('dict')
         groups = conn.save_one(SQL,None)
         logs.logger.info(f'{name} 회원이 가입을 하였습니다.')
-        return render_template('/user/join.html')
+        return redirect(url_for('user_page.user_login_service'))
 
 def user_profile_service():
     return render_template('/user/profile.html')
@@ -93,6 +90,10 @@ def user_manage_service():
     else:
         return '불가능한 접근입니다'
 
+
+def user_logout_service():
+    session.pop('userInfo', None)
+    return redirect(url_for('user_page.user_login_service'))
 
 def encrypt_pw(id, password):
     password = password+id

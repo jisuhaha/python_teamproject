@@ -40,13 +40,14 @@ systemid        oid	            int pk              // index용
 상차지	        loadingoid	    int	                // loadingpoint.oid
 하차지	        unloadingoid	int	                // loadingpoint.oid
 요청차량        weight_t        int                 // 운송해야하는 화물의 무게(단위:t)
+운임            cost            int,
+배정기사        driverid        varchar(10)
 
 
 <distance_loc>    -- 운송거리 정보에 관한 내용이 저장되는 DB
 상차지          loadingpoint    varchar(10)
 하차지          unloadingpoint  varchar(10)
-운송거리        distance_km     int
-거리운임        distance_cost   int
+운송거리        distance        int
 // 운송거리 값을 기준으로 10km 당 1만원으로 책정
  {운송거리계산}
     서울 -> 인천(20km), 대전(150km), 울산(300km) ,대구(250km), 광주(350km), 부산(400km)

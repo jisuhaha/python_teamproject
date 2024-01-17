@@ -101,7 +101,7 @@ insert into xmember
 insert into xmember 
 	(oid, memberid, pssword, telphone, name, grade, info)
 	values (
-	20, 'kumhotire', 'dkjciq21aQ', '062-8211-2471', '파리크라상', '20', '광주 광산구 소촌동 580'
+	20, 'kumhotire', 'dkjciq21aQ', '062-8211-2471', '금호타이어', '20', '광주 광산구 소촌동 580'
     );         
 
 insert into xmember 

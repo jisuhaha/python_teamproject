@@ -37,6 +37,8 @@ create table board(
 	loadingoid		INT,
 	unloadingoid	INT,
     weight_t        int,
+    cost            int,
+    driverid        varchar(10)   
     FOREIGN KEY(loadingoid) REFERENCES loadingpoint(oid),
     FOREIGN KEY(unloadingoid) REFERENCES loadingpoint(oid)
 )default character set utf8 collate utf8_general_ci;
@@ -46,7 +48,6 @@ DROP TABLE IF EXISTS distance_loc;
 create table distance_loc(
     loadingpoint     varchar(10),
     unloadingpoint   varchar(10),
-    distance_km      int,
-    distance_cost    int
+    distance      int    
 )default character set utf8 collate utf8_general_ci;
 

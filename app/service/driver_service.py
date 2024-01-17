@@ -57,7 +57,7 @@ def driver_mytable_service():
     conn = DB('dict')
     result = conn.select_all(SQL, None)
     print(SQL)
-    return render_template('/driver/mytable.html1' ,boards=posts, pagination=Pagination(
+    return render_template('/driver/mytable.html' ,boards=posts, pagination=Pagination(
             page=page,
             total=total,
             per_page=per_page,

@@ -27,12 +27,13 @@ def user_login_service():
             session['userInfo'] = result
             if session['userInfo'][0].get('grade')=='10':
                 logs.logger.info(f'{name} 회원이 로그인 하였습니다.')
-                return render_template('/user/main.html', user=result)
+                return redirect(url_for('driver_page.driver_mytable_service'))
             elif session['userInfo'][0].get('grade')=='20':
                 logs.logger.info(f'{name} 고객사가 로그인 하였습니다.')
-                return cust_table_service()
+                return redirect(url_for('cust_page.cust_table_service'))
             else :
-                return render_template('/user/main.html', user=result)
+                logs.logger.info(f'{name} 관리자가 로그인 하였습니다.')
+                return redirect(url_for('user_page.user_manage_service'))
 
             #print(session['userInfo'][0].get('memberid'))
 
@@ -90,8 +91,7 @@ def user_manage_service():
             search=True
                             )
     else:
-        session['userInfo'] = result
-        return render_template('/user/main.html', user=result)
+        return '불가능한 접근입니다'
 
 
 def encrypt_pw(id, password):

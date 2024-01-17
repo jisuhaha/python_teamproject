@@ -5,12 +5,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>고객사 등록</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/table.css')}}">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    
+
 </head>
 
 <body>
-    <form action="{{url_for('cust_page.cust_reg_service')}}" method="post">
+white
+    <form action="{{url_for('cust_page.cust_reg_service')}}" method="post" name="boardform">
+    <table class="container">
+        <tbody>
+            <tr>
+                <td>상차일</td>
+                <td>
+                    <input type="datetime-local" name="loadingtime">
+                </td>
+            </tr>
+            <tr>
+                <td>하차일</td>
+                <td>
+                    <input type="datetime-local" name="unloadingtime">
+                </td>
+            </tr>
+            <tr>
+                <td>업체명</td>
+                <td>
+                    <input type='text' name="groupname" , placeholder="업체명" , required>
+                </td>
+            </tr>
+            <tr>
+                <td>상차지명</td>
+                <td>
+                    <input id="start_name" type='text' name="startpointName" , placeholder="상차지명" ,required>
+                </td>
+            </tr>
+            <tr>
+                <td>상차지주소</td>
+                <td>
+                    <input id="start_point" type='text' name="startpointAddress" , placeholder="상차지 주소" ,required>
+                </td>
+            </tr>
+            <tr>
+                <td>하차지명</td>
+                <td>
+                    <input id="start_name" type='text' name="endpointName" , placeholder="하차지명" ,required>
+                </td>
+            </tr>
+            <tr>
+                <td>하차지주소</td>
+                <td>
+                    <input id="end_point" type='text' name="endpointAddress" , placeholder="하차지 주소" , required>
+                </td>
+            </tr>
+            <tr>
+                <td>요청톤수</td>
+                <td>
+                    <select id="carinfo" name="carinfo">
+                        <option value="" selected disabled hidden>톤수를 선택해주세요.</option>
+                        <option value="1">1톤</option>
+                        <option value="2">2톤</option>
+                        <option value="3">3톤</option>
+                        <option value="4">4톤</option>
+                        <option value="5">5톤</option>
+                        <option value="6">6톤</option>
+                        <option value="7">7톤</option>
+                        <option value="8">8톤</option>
+                        <option value="9">9톤</option>
+                        <option value="10">10톤</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div onclick="hideButton()">요금 정산</div>
+                </td>
+                <td>
+                    <p id="pricevalue" style="display: none"></p>
+                    <input type="hidden" name="cost" id="cost">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <input type="submit" value="저장" id="saveboard">
+    </form>
+
+
+    <!-- <form action="{{url_for('cust_page.cust_reg_service')}}" method="post">
         <dl>
 
             <dt>상차일</dt>
@@ -79,8 +159,8 @@
         </dl>
         <dl>
             <dt>요청 톤수</dt>
-            <select id="carinfo" name="carinfo" onchange="change_option(this, 'basic');" label="COLOR"
-                opt_type="SELECT" opt_id="1" opt_mix="Y" require="Y" opt_mandatory="Y" class="basic_option">
+            <select id="carinfo" name="carinfo" onchange="change_option(this, 'basic');" label="COLOR" opt_type="SELECT"
+                opt_id="1" opt_mix="Y" require="Y" opt_mandatory="Y" class="basic_option">
 
                 <option value="" selected disabled hidden>톤수를 선택해주세요.</option>
 
@@ -116,7 +196,7 @@
         <dl>
             <input type="submit" value="저장">
         </dl>
-    </form>
+    </form> -->
 </body>
 
 <script>
@@ -134,17 +214,20 @@
                 // Handle the successful response
                 $('#result').text('Response from server: ' + response.message);
                 var priceElement = document.getElementById("pricevalue");
-                document.getElementById("cost").value=response;
+                document.getElementById("cost").value = response;
                 priceElement.style.display = "block";
-                priceElement.innerText = response+ '원'
+                priceElement.innerText = response + '원'
             },
             error: function (error) {
                 // Handle any errors
                 console.error('Error:', error);
             }
         });
+    }
 
-        button.style.display = "none";
+    function formSubmit() {
+        var form = document.boardform;
+        form.submit();
     }
 </script>
 

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transportation Information</title>
+</head>
+<body>
+    <h1> 운송 정보 조회 </h1>
+    <button></button>
+    <table>
+        <tbody>
+            <hr>
+            <tr>
+                <td> 고객사 id</td>
+                <td> 고객사 이름</td>
+                <td> 출발 일시</td>
+                <td> 도착 일시</td>
+                <td> 출발지 코드</td>
+                <td> 도착지 코드</td>
+                <td> 무게 정보 (단위: 톤)</td>
+                <td> 운전자 연락처</td>
+                <td> 운전자명</td>
+                <td> 차량 번호</td>
+            </tr>
+            {% for row in data: %}
+            <tr>
+                <td>{{row['group_id']}}</td>
+                <td>{{row['group_name']}}</td>
+                <td>{{row['departure_time']}}</td>
+                <td>{{row['arrival_time']}}</td>
+                <td>{{row['departure_code']}}</td>
+                <td>{{row['arrival_code']}}</td>
+                <td>{{row['weight_info']}}</td>
+                <td>{{row['driver_tel']}}</td>
+                <td>{{row['driver_name']}}</td>
+                <td>{{row['driver_car_num']}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

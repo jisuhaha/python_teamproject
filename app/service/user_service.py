@@ -21,14 +21,16 @@ def user_login_service():
         conn = DB('dict')
         result = conn.select_all(SQL,None)
         if len(result)==0:
-            logs.logger.info(f'{name} 회원이 로그인 하였습니다.')
+            logs.logger.info(f'{name} 관리자가 로그인 하였습니다.')
             return render_template('/user/login.html')
         else:
             session['userInfo'] = result
             if session['userInfo'][0].get('grade')=='10':
+                logs.logger.info(f'{name} 회원이 로그인 하였습니다.')
                 return render_template('/user/main.html', user=result)
             elif session['userInfo'][0].get('grade')=='20':
-                return redirect(url_for('cust_page.cust_table_service'))
+                logs.logger.info(f'{name} 고객사가 로그인 하였습니다.')
+                return cust_table_service()
             else :
                 return render_template('/user/main.html', user=result)
 

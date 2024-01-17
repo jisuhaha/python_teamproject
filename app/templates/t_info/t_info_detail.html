@@ -3,11 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transportation Information</title>
+    <title>Transportation Information detail</title>
+
+    <script type="text/javascript">
+        function hide(thing){
+          var elem = document.getElementById(thing);
+          elem.style.display = 'none';
+        }   
+        function show(thing){
+          var elem = document.getElementById(thing);
+          elem.style.display = 'block';
+        }
+        function CalendarSelectHandler(select){
+        if(select.value == 'dep_datetime' || select.value == 'arr_datetime'){
+            hide('search_text_id');
+            show('search_datetime_id');
+        } else {
+            show('search_text_id');
+            hide('search_datetime_id');
+        }}
+        
+        // body에 적용해서 첫 로딩시에 검색창 숨기기
+        function hide_default(){
+            document.getElementById('search_text_id').style.display='none';
+        }
+    </script>
+
+
+
 </head>
-<body>
+<body onload='hide_default()'>
     <h1> 운송 정보 조회 </h1>
-    <button></button>
     <table>
         <tbody>
             <hr>
@@ -18,8 +44,8 @@
                 <td> 도착 일시</td>
                 <td> 출발지 코드</td>
                 <td> 도착지 코드</td>
-                <td> 무게 정보 (단위: 톤)</td>
-                <td> 운전자 연락처</td>
+                <td> <div style="text-align: center"></div>운송가능무게 (단위: 톤)</div></td>
+                <td> <div style="text-align: center">운전자 연락처</div></td>
                 <td> 운전자명</td>
                 <td> 차량 번호</td>
             </tr>
@@ -39,5 +65,31 @@
             {% endfor %}
         </tbody>
     </table>
+
+    <hr>
+    <form action="/t_info/detail" method="post">
+        <p>
+            <select name="select_option" onchange="CalendarSelectHandler(this)">
+                <option value="dep_datetime"> 출발일시 </option>
+                <option value="arr_datetime"> 종료일시 </option>
+                <option value="driver_name"> 운전자명 </option>
+                <option value="dep_code"> 출발지 코드 </option>
+                <option value="arr_code"> 도착지 코드 </option>
+                <option value="weight_info"> 운송가능무게 </option>
+                <option value="driver_car_num"> 차량번호 </option>
+                <option value="driver_tel"> 운전자 연락처</option>
+            </select>
+        </p>
+        <p id="search_datetime_id">
+            <input type="datetime-local" name="search_datetime">
+        </p>
+        <p id="search_text_id">
+            <input type="text" name="search_text">
+        </p>
+        <p id="search_button_id">
+            <input type="submit" value="검색" name="search_button">
+        </p>
+    </form>
+
 </body>
 </html>

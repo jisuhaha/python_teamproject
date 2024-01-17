@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/table.css')}}">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    
+</head>
+
+<body>
+    <h1>배정 가능 목록</h1>
+    <table class="container">
+        <thead>
+            <tr>
+                <th>고객사명</th>
+                <th>상차지</th>
+                <th>상차지 주소</th>
+                <th>상차시간</th>
+                <th>하차지</th>
+                <th>하차지주소</th>
+                <th>하차시간</th>
+                <th>요청차량</th>
+                <th>운임비</th>
+                <th>기사명</th>
+                <th>기사연락처</th>
+                <th>차량번호</th>
+                <th>차량정보</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for board in boards %}
+            <tr>
+                <form action="{{url_for('driver_page.driver_assign_service')}}" method="post" name="boardform">
+                <input type="hidden" name="boardOID" value="{{board.oid}}">
+                <td>{{board.groupname}}</td>
+                <td>{{board.loadingname}}</td>
+                <td>{{board.loadingaddress}}</td>
+                <td>{{board.loadingtime}}</td>
+                <td>{{board.unloadingname}}</td>
+                <td>{{board.unloadingaddress}}</td>
+                <td>{{board.unloadingtime}}</td>
+                <td>{{board.car}}</td>
+                <td>{{board.cost}}</td>
+                <td>{{board.name}}</td>
+                <td>{{board.telphone}}</td>
+                <td>{{board.info}}</td>
+                <td>{{board.carinfo}}</td>
+                <td>
+                    <input type="submit" value="배정하기">
+                </td>
+                </form>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="/cust/reg" class="btn-gradient blue mini">등록</a>
+    <div id="page-div">
+        {{ pagination.links | safe }}
+    </div>
+</body>
+</html>

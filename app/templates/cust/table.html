@@ -49,14 +49,8 @@
             {% endfor %}
         </tbody>
     </table>
-    <a href="#" class="write-button">글쓰기</a>
     <div id="page-div">
         {{ pagination.links | safe }}
     </div>
 </body>
-<script>
-    document.querySelector('.write-button').addEventListener('click', function() {
-        location.href=('/cust/reg');
-    });
-</script>
 </html>

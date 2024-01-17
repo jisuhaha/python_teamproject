@@ -2,6 +2,8 @@ from flask import render_template, request,session, redirect, url_for
 from flask_paginate import Pagination, get_page_args
 from app.db import DB
 from datetime import datetime
+import logs.loggings as logs
+
 
 
 def cust_price_service():
@@ -37,8 +39,10 @@ def cust_reg_service():
         board_sql = '''insert into board(groupoid, groupname, loadingtime, unloadingtime, loadingoid, unloadingoid, weight_t, cost ) values 
         ('{0}','{1}',%s,%s,'{2}','{3}','{4}',{5})'''.format(session['userInfo'][0].get('oid'), groupname, start_id, end_id,carinfo, cost)
         conn = DB('dict')
-        conn.save_one(board_sql,(loadingtime_obj,unloadingtime_obj))
-        return redirect(url_for('cust_page.cust_table_service'))
+        print(board_sql)
+        groups = conn.save_one(board_sql,(loadingtime_obj,unloadingtime_obj))
+        logs.logger.info(f'고객사 운송 정보가 입력되었습니다. - {groupname}')   
+        return cust_table_service()
     else:
         return render_template('/cust/register.html')
 

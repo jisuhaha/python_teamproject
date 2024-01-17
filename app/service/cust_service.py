@@ -2,6 +2,7 @@ from flask import render_template, request,session
 from app.db import DB
 
 
+
 def cust_price_service():
     carinfo = request.args["carinfo"]
     start = request.args["start"][0:2]

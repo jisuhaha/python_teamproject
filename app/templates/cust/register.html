@@ -26,7 +26,25 @@
         </dl>
         <dl>
             <dt>상차지명</dt>
-            <input id="start_name" type='text' name="startpointName" , placeholder="상차지명" ,required>
+            <select id="start_name" name="startpointName" onchange="change_option(this, 'basic');" label="COLOR"
+            opt_type="SELECT" opt_id="1" opt_mix="Y" require="Y" opt_mandatory="Y" class="basic_option">
+
+            <option value="" selected disabled hidden>상차지를 선택해주세요.</option>
+
+            <option value="1">서울</option>
+
+            <option value="2">인천</option>
+
+            <option value="3">대전</option>
+
+            <option value="4">대구</option>
+
+            <option value="5">울산</option>
+
+            <option value="6">부산</option>
+
+            <option value="7">광주</option>
+            </select>
         </dl>
         <dl>
             <dt>상차지 주소</dt>
@@ -34,7 +52,26 @@
         </dl>
         <dl>
             <dt>하차지명</dt>
-            <input id="start_name" type='text' name="endpointName" , placeholder="하차지명" ,required>
+            <select id="start_name" name="endpointName" onchange="change_option(this, 'basic');" label="COLOR"
+            opt_type="SELECT" opt_id="1" opt_mix="Y" require="Y" opt_mandatory="Y" class="basic_option">
+
+            <option value="" selected disabled hidden>하차지를 선택해주세요.</option>
+
+            <option value="1">서울</option>
+
+            <option value="2">인천</option>
+
+            <option value="3">대전</option>
+
+            <option value="4">대구</option>
+
+            <option value="5">울산</option>
+
+            <option value="6">부산</option>
+
+            <option value="7">광주</option>
+           
+        </select>
         </dl>
         <dl>
             <dt>하차지 주소</dt>

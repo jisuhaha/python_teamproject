@@ -21,8 +21,7 @@ def user_login_service():
             return render_template('/user/login.html')
         else:
             session['userInfo'] = result
-            print(session['userInfo'][0])
-            print(session['userInfo'][0].get('memberid'))
+            #print(session['userInfo'][0].get('memberid'))
             return render_template('/user/main.html', user=result)
 
 def user_join_service():

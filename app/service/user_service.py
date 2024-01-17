@@ -1,8 +1,9 @@
-from flask import render_template, request,session, redirect
+from flask import render_template, request,session, redirect, url_for
 from flask_paginate import Pagination, get_page_args
 from app.db import DB
 import hashlib, pymysql
 from app.service.cust_service import cust_table_service
+import logs.loggings as logs
 #from flask_jwt_extended import create_access_token, set_access_cookies, create_refresh_token
 
 def user_main_service():
@@ -15,17 +16,19 @@ def user_login_service():
         memberid = request.form.get("memberid")
         password = request.form.get("password")
         password = encrypt_pw(memberid,password)
+        name = request.form.get("name")
         SQL = "SELECT * FROM XMEMBER where memberid = '{0}' and password = '{1}'".format(memberid,password)
         conn = DB('dict')
         result = conn.select_all(SQL,None)
         if len(result)==0:
+            logs.logger.info(f'{name} 회원이 로그인 하였습니다.')
             return render_template('/user/login.html')
         else:
             session['userInfo'] = result
             if session['userInfo'][0].get('grade')=='10':
                 return render_template('/user/main.html', user=result)
             elif session['userInfo'][0].get('grade')=='20':
-                return cust_table_service()
+                return redirect(url_for('cust_page.cust_table_service'))
             else :
                 return render_template('/user/main.html', user=result)
 
@@ -48,6 +51,7 @@ def user_join_service():
         ('{0}','{1}','{2}','{3}','{4}','{5}','{6}')'''.format(memberid, password, telphone, name, carinfo, info, grade)
         conn = DB('dict')
         groups = conn.save_one(SQL,None)
+        logs.logger.info(f'{name} 회원이 가입을 하였습니다.')
         return render_template('/user/join.html')
 
 def user_profile_service():

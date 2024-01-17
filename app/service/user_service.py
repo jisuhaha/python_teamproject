@@ -15,7 +15,7 @@ def user_login_service():
     else :
         memberid = request.form.get("memberid")
         password = request.form.get("password")
-        password = encrypt_pw(memberid,password)
+        #password = encrypt_pw(memberid,password)
         name = request.form.get("name")
         SQL = "SELECT * FROM XMEMBER where memberid = '{0}' and password = '{1}'".format(memberid,password)
         conn = DB('dict')
@@ -43,7 +43,7 @@ def user_join_service():
     else:
         memberid=request.form.get("memberid")
         password=request.form.get("password")
-        password = encrypt_pw(memberid,password)
+        #password = encrypt_pw(memberid,password)
         telphone=request.form.get("telphone")
         name=request.form.get("name")
         info=request.form.get("info")
@@ -94,7 +94,7 @@ def user_manage_service():
         return '불가능한 접근입니다'
 
 
-def encrypt_pw(id, password):
-    password = password+id
-    password = hashlib.sha256(password.encode()).hexdigest()
-    return password
+#def encrypt_pw(id, password):
+#    password = password+id
+#    password = hashlib.sha256(password.encode()).hexdigest()
+#    return password

@@ -38,7 +38,7 @@ def cust_reg_service():
         conn = DB('dict')
         end_id = conn.save_one_getid(loading_end,None)
         board_sql = '''insert into board(groupoid, groupname, loadingtime, unloadingtime, loadingoid, unloadingoid, weight_t, cost ) values 
-        ('{0}','{1}',%s,%s,'{2}','{3}','{4}',{5})'''.format(session['userInfo'][0].get('oid'), groupname, start_id, end_id,carinfo, cost)
+        ('{0}','{1}',%s,%s,'{2}','{3}','{4}',{5})'''.format(session['userinfo'][0].get('oid'), groupname, start_id, end_id,carinfo, cost)
         conn = DB('dict')
         print(board_sql)
         groups = conn.save_one(board_sql,(loadingtime_obj,unloadingtime_obj))
@@ -50,7 +50,7 @@ def cust_reg_service():
 def cust_table_service():
     per_page = 5
     page = request.args.get('page', 1, type=int)
-    user_oid = str(session['userInfo'][0].get('oid'))
+    user_oid = str(session['userinfo'][0].get('oid'))
     page, _, offset = get_page_args(per_page=per_page)
     dbcon = DB('dict')
     cur = dbcon.cur

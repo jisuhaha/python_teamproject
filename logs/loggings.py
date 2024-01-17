@@ -7,7 +7,7 @@ logging.config.fileConfig(config_path)
 logger = logging.getLogger()
 
 if __name__ == '__main__' :
-    logger.debug('debug...')
+    logger.debug('디버그debug...')
     logger.info('info...')
     logger.warning('warning...')
     logger.error('error...')

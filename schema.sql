@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS xMember;
 create table xMember(
     oid         INT      NOT NULL AUTO_INCREMENT PRIMARY KEY,
     memberid    varchar(16),
-    pssword		varchar(256),
+    password		varchar(256),
     telphone	varchar(13),
     name 		VARCHAR(10),
     grade		VARCHAR(2),

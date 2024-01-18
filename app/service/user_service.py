@@ -93,6 +93,12 @@ def user_manage_service():
         return '불가능한 접근입니다'
 
 def user_logout_service():
+    conn = DB('dict')
+    SQL = "SELECT * FROM XMEMBER "
+    result = conn.select_all(SQL,None)
+    name = result[0].get('name')
+    logs.logger.info(f'{name} 회원이 로그아웃 하였습니다.')
+
     session.pop('userInfo', None)
     return redirect(url_for('user_page.user_login_service'))
 
@@ -101,7 +107,6 @@ def user_check_exists():
     SQL = "select count(0) as count from xmember where memberid = '{0}'".format(id)
     conn = DB('dict')
     result = conn.select_one(SQL,None)
-
     if result.get("count") == 0:
         return '0'
     else:

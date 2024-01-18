@@ -11,24 +11,35 @@
 </head>
 
 <body>
-    <a href="/user/logout" class="btn-gradient blue mini">로그아웃</a>
+    <div class="page">
+        <header>
+            <h2>물류시스템</h2>
+            <nav>
+                <ul>
+                    <li><a href="#"></a></li>
+                    <li><a href="#"></a></li>
+                    <li><a href="/user/logout">logout</a></li>
+                </ul>
+            </nav>
+        </header>
+    </div>
     <h1>운송현황</h1>
     <table class="container">
         <thead>
             <tr>
-                <th>고객사명</th>
-                <th>상차지</th>
-                <th>상차지 주소</th>
-                <th>상차시간</th>
-                <th>하차지</th>
-                <th>하차지주소</th>
-                <th>하차시간</th>
-                <th>요청차량</th>
-                <th>운임비</th>
-                <th>기사명</th>
-                <th>기사연락처</th>
-                <th>차량번호</th>
-                <th>차량정보</th>
+                <th id="thboard1">고객사명</th>
+                <th id="thboard2">상차지</th>
+                <th id="thboard3">상차지 주소</th>
+                <th id="thboard4">상차시간</th>
+                <th id="thboard5">하차지</th>
+                <th id="thboard6">하차지주소</th>
+                <th id="thboard7">하차시간</th>
+                <th id="thboard8">요청차량</th>
+                <th id="thboard9">운임비</th>
+                <th id="thboard10">기사명</th>
+                <th id="thboard11">기사연락처</th>
+                <th id="thboard12">차량번호</th>
+                <th id="thboard13">차량정보</th>
             </tr>
         </thead>
         <tbody>
@@ -46,7 +57,7 @@
                 <td>{{board.name}}</td>
                 <td>{{board.telphone}}</td>
                 <td>{{board.info}}</td>
-                <td>{{board.carinfo}}톤</td>
+                <td>{{board.carinfo}}</td>
             </tr>
             {% endfor %}
         </tbody>

@@ -59,7 +59,7 @@ def user_profile_service():
 
 def user_manage_service():
     if '00' == session['userInfo'][0].get('grade'):
-        per_page = 10
+        per_page = 5
         page = request.args.get('page', 1, type=int)
         page, _, offset = get_page_args(per_page=per_page)
         dbcon = DB('dict')

@@ -242,3 +242,51 @@ height: 100%;
 display: flex;
 align-items: center;
 }
+body > div.page > header > nav > ul > li > a{
+  text-decoration-line: none;
+  color: white;
+}
+
+#selected_atag {
+  font-weight : bold;
+}
+
+#thboard1{
+  width : 100px;
+}
+#thboard2{
+  width : 100px;
+}
+#thboard3{
+  width : 153px;
+}
+#thboard4{
+  width : 120px;
+}
+#thboard5{
+  width : 100px;
+}
+#thboard6{
+  width : 153px;
+}
+#thboard7{
+  width : 120px;
+}
+#thboard8{
+  width : 100px;
+}
+#thboard9{
+  width : 100px;
+}
+#thboard10{
+  width : 100px;
+}
+#thboard11{
+  width : 143px;
+}
+#thboard12{
+  width : 100px;
+}
+#thboard13{
+  width : 117px;
+}

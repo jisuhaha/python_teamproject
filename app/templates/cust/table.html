@@ -4,16 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>운송현황</title>
     <link rel="stylesheet" href="{{url_for('static',filename='css/table.css')}}">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 </head>
 
 <body>
     <div class="page">
         <header>
-            <h2>물류시스템</h2>
+            <img src={{ url_for('static', filename='/images/site_logo.png') }} style="width: 255px;">
             <nav>
                 <ul>
                     <li><a href="#"></a></li>

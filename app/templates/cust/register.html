@@ -7,11 +7,23 @@
     <title>고객사 등록</title>
     <link rel="stylesheet" href="{{url_for('static',filename='css/table.css')}}">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 </head>
 
 <body>
-white
+    <div class="page">
+        <header>
+            <img src={{ url_for('static', filename='/images/site_logo.png') }} style="width: 255px;">
+            <nav>
+                <ul>
+                    <li><a href="#"></a></li>
+                    <li><a href="/cust/table">운송현황</a></li>
+                    <li><a href="/user/logout">logout</a></li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+    <h1>운송요청</h1>
     <form action="{{url_for('cust_page.cust_reg_service')}}" method="post" name="boardform">
     <table class="container">
         <tbody>

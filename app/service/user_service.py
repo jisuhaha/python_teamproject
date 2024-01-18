@@ -18,11 +18,11 @@ def user_login_service():
         SQL = "SELECT * FROM XMEMBER where memberid = '{0}' and password = '{1}'".format(memberid,password)
         conn = DB('dict')
         result = conn.select_all(SQL,None)
-        name = result[0].get('name')
         if len(result)==0:
             logs.logger.warning('로그인에 실패 하였습니다.')
             return render_template('/user/login.html')
         else:
+            name = result[0].get('name')
             session['userInfo'] = result
             if session['userInfo'][0].get('grade')=='10':
                 logs.logger.info(f'{name} 회원이 로그인 하였습니다.')
@@ -93,10 +93,10 @@ def user_manage_service():
         return '불가능한 접근입니다'
 
 def user_logout_service():
-    name = str(session['userInfo'][0].get('name'))
-    logs.logger.info(f'{name} 회원이 로그아웃 하였습니다.')
-
-    session.pop('userInfo', None)
+    if(session['userInfo']!=None):
+        name = str(session['userInfo'][0].get('name'))
+        logs.logger.info(f'{name} 회원이 로그아웃 하였습니다.')
+        session.pop('userInfo', None)
     return redirect(url_for('user_page.user_login_service'))
 
 def user_check_exists():

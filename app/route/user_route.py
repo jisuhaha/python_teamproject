@@ -10,4 +10,5 @@ user_page.add_url_rule("/logout", methods=['GET','POST'], view_func=user_logout_
 user_page.add_url_rule("/join", methods=['GET','POST'], view_func=user_join_service)
 user_page.add_url_rule("/profile", methods=['GET','POST'], view_func=user_profile_service)
 user_page.add_url_rule("/manage", methods=['GET','POST'], view_func=user_manage_service)
+user_page.add_url_rule("/exists", methods=['GET','POST'], view_func=user_check_exists)
 

@@ -40,42 +40,41 @@ $(document).ready(function () {
   }
   var password = document.getElementById("password")
   var re_password = document.getElementById("re_password")
-
+  
   password.addEventListener("focusout", (event) => {
     checkPassword()
   });
-
+  
   re_password.addEventListener("focusout", (event) => {
     checkPassword()
   });
-
-
-
-
+  
+  
+  
+  
   var memberid = document.getElementById("memberid")
-  password.addEventListener("focusout", (event) => {
-
+  memberid.addEventListener("focusout", (event) => {
+    check_id()
   });
-
-
+  
+  
   function check_id() {
     var id = document.getElementById("memberid").value;
     $.ajax({
-        url: '/cust/price',
-        type: 'GET',
-        dataType: 'text',
-        data: { 'carinfo': carinfo.value, 'start': start.value, 'end': end.value },
-        success: function (response) {
-            // Handle the successful response
-            $('#result').text('Response from server: ' + response.message);
-            var priceElement = document.getElementById("pricevalue");
-            document.getElementById("cost").value = response;
-            priceElement.style.display = "block";
-            priceElement.innerText = response + '원'
+      url: '/user/exists',
+      type: 'GET',
+      dataType: 'text',
+      data: { 'id': id },
+      success: function (response) {
+        if(response=='0'){
+          document.getElementById("id_message").innerHTML = "";
+        } else {
+            document.getElementById("id_message").style.color = "red";
+            document.getElementById("id_message").innerHTML = "중복된 ID";
+          }
         },
         error: function (error) {
-            // Handle any errors
-            console.error('Error:', error);
+          console.error('Error:', error);
         }
     });
 }

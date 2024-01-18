@@ -94,6 +94,19 @@ def user_logout_service():
     session.pop('userInfo', None)
     return redirect(url_for('user_page.user_login_service'))
 
+def user_check_exists():
+    id = request.args["id"]
+    SQL = "select count(0) as count from xmember where memberid = '{0}'".format(id)
+    conn = DB('dict')
+    result = conn.select_one(SQL,None)
+    print(result)
+    if result.get("count") == 0:
+        return '0'
+    else:
+        return '1'
+    
+
+
 #def encrypt_pw(id, password):
     #password = password+id
     #password = hashlib.sha256(password.encode()).hexdigest()

@@ -13,7 +13,7 @@
 <body>
     <div class="page">
         <header>
-            <img src={{ url_for('static', filename='/images/site_logo.png') }} style="width: 255px;">
+            <img src={{ url_for('static', filename='/images/site_logo.png' ) }} style="width: 255px;">
             <nav>
                 <ul>
                     <li><a href="#"></a></li>
@@ -24,129 +24,143 @@
         </header>
     </div>
     <h1>운송요청</h1>
-    <form action="{{url_for('cust_page.cust_reg_service')}}" method="post" name="boardform">
-    <table class="container">
-        <tbody>
-            <tr>
-                <td>상차일</td>
-                <td>
-                    <input type="datetime-local" name="loadingtime">
-                </td>
-            </tr>
-            <tr>
-                <td>하차일</td>
-                <td>
-                    <input type="datetime-local" name="unloadingtime">
-                </td>
-            </tr>
-            <tr>
-                <td>업체명</td>
-                <td>
-                    <input type='text' name="groupname" , placeholder="업체명" , required>
-                </td>
-            </tr>
-            <tr>
-                <td>상차지명</td>
-                <td>
-                    <select id="start_name" name="startpointName" onchange="change_option(this, 'basic');" label="COLOR"
-                    opt_type="SELECT" opt_id="1" opt_mix="Y" require="Y" opt_mandatory="Y" class="basic_option">
-        
-                    <option value="" selected disabled hidden>상차지를 선택해주세요.</option>
-        
-                    <option value="1">서울</option>
-        
-                    <option value="2">인천</option>
-        
-                    <option value="3">대전</option>
-        
-                    <option value="4">대구</option>
-        
-                    <option value="5">울산</option>
-        
-                    <option value="6">부산</option>
-        
-                    <option value="7">광주</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>상차지주소</td>
-                <td>
-                    <input id="start_point" type='text' name="startpointAddress" , placeholder="상차지 주소" ,required>
-                </td>
-            </tr>
-            <tr>
-                <td>하차지명</td>
-                <td>
-                    <select id="start_name" name="endpointName" onchange="change_option(this, 'basic');" label="COLOR"
-                    opt_type="SELECT" opt_id="1" opt_mix="Y" require="Y" opt_mandatory="Y" class="basic_option">
-        
-                    <option value="" selected disabled hidden>하차지를 선택해주세요.</option>
-        
-                    <option value="1">서울</option>
-        
-                    <option value="2">인천</option>
-        
-                    <option value="3">대전</option>
-        
-                    <option value="4">대구</option>
-        
-                    <option value="5">울산</option>
-        
-                    <option value="6">부산</option>
-        
-                    <option value="7">광주</option>
-                   
-                </select>
-                </td>
-            </tr>
-            <tr>
-                <td>하차지주소</td>
-                <td>
-                    <input id="end_point" type='text' name="endpointAddress" , placeholder="하차지 주소" , required>
-                </td>
-            </tr>
-            <tr>
-                <td>요청톤수</td>
-                <td>
-                    <select id="carinfo" name="carinfo">
-                        <option value="" selected disabled hidden>톤수를 선택해주세요.</option>
-                        <option value="1">1톤</option>
-                        <option value="2">2톤</option>
-                        <option value="3">3톤</option>
-                        <option value="4">4톤</option>
-                        <option value="5">5톤</option>
-                        <option value="6">6톤</option>
-                        <option value="7">7톤</option>
-                        <option value="8">8톤</option>
-                        <option value="9">9톤</option>
-                        <option value="10">10톤</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div onclick="hideButton()">요금 정산</div>
-                </td>
-                <td>
-                    <p id="pricevalue" style="display: none"></p>
-                    <input type="hidden" name="cost" id="cost">
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <input type="submit" value="저장" id="saveboard">
+    <form action="{{url_for('cust_page.cust_reg_service')}}" method="post" name="boardform"
+        onsubmit="return check_board_form()">
+        <table class="container">
+            <tbody>
+                <tr>
+                    <td>상차일</td>
+                    <td>
+                        <input id="loadingtime" type="datetime-local" name="loadingtime">
+                    </td>
+                </tr>
+                <tr>
+                    <td>하차일</td>
+                    <td>
+                        <input id="unloadingtime" type="datetime-local" name="unloadingtime">
+                    </td>
+                </tr>
+                <tr>
+                    <td>업체명</td>
+                    <td>
+                        <input id="groupname" type='text' name="groupname" , placeholder="업체명" , required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>상차지명</td>
+                    <td>
+                        <select id="start_name" name="startpointName" onchange="change_option(this, 'basic');"
+                            label="COLOR" opt_type="SELECT" opt_id="1" opt_mix="Y" require="Y" opt_mandatory="Y"
+                            class="basic_option">
+
+                            <option value="" selected disabled hidden>상차지를 선택해주세요.</option>
+
+                            <option value="1">서울</option>
+
+                            <option value="2">인천</option>
+
+                            <option value="3">대전</option>
+
+                            <option value="4">대구</option>
+
+                            <option value="5">울산</option>
+
+                            <option value="6">부산</option>
+
+                            <option value="7">광주</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>상차지주소</td>
+                    <td>
+                        <input id="start_point" type='text' name="startpointAddress" , placeholder="상차지 주소" ,required>
+                        <p id="stpoint_message"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>하차지명</td>
+                    <td>
+                        <select id="end_name" name="endpointName" onchange="change_option(this, 'basic');" label="COLOR"
+                            opt_type="SELECT" opt_id="1" opt_mix="Y" require="Y" opt_mandatory="Y" class="basic_option">
+
+                            <option value="" selected disabled hidden>하차지를 선택해주세요.</option>
+
+                            <option value="1">서울</option>
+
+                            <option value="2">인천</option>
+
+                            <option value="3">대전</option>
+
+                            <option value="4">대구</option>
+
+                            <option value="5">울산</option>
+
+                            <option value="6">부산</option>
+
+                            <option value="7">광주</option>
+
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>하차지주소</td>
+                    <td>
+                        <input id="end_point" type='text' name="endpointAddress" , placeholder="하차지 주소" , required>
+                        <p id="endpoint_message"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>요청톤수</td>
+                    <td>
+                        <select id="carinfo" name="carinfo">
+                            <option value="" selected disabled hidden>톤수를 선택해주세요.</option>
+                            <option value="1">1톤</option>
+                            <option value="2">2톤</option>
+                            <option value="3">3톤</option>
+                            <option value="4">4톤</option>
+                            <option value="5">5톤</option>
+                            <option value="6">6톤</option>
+                            <option value="7">7톤</option>
+                            <option value="8">8톤</option>
+                            <option value="9">9톤</option>
+                            <option value="10">10톤</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div onclick="cal_cost()">요금 정산</div>
+                    </td>
+                    <td>
+                        <p id="pricevalue" style="display: none"></p>
+                        <input id="cost" type="hidden" name="cost">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <input type="submit" value="저장" id="saveboard">
     </form>
 
 
 </body>
 
 <script>
-    function hideButton() {
+    function cal_cost() {
         var button = document.getElementById("myButton");
         var carinfo = document.getElementById("carinfo");
         var start = document.getElementById("start_point");
         var end = document.getElementById("end_point");
+        if (start.value.length == 0) {
+            alert('상차지 주소를 입력해주세요')
+            return false;
+        } else if (end.value.length == 0) {
+            alert('하차지 주소를 입력해주세요')
+            return false;
+        } else if (carinfo.value.length == 0) {
+            alert('차량톤수를 선택해주세요')
+            return false;
+        }
         $.ajax({
             url: '/cust/price',
             type: 'GET',
@@ -163,8 +177,97 @@
             error: function (error) {
                 // Handle any errors
                 console.error('Error:', error);
+                alert('상차지 주소, 하차지 주소, 톤수 확인');
             }
         });
+    }
+
+    function startCheck() {
+        var start = document.getElementById("start_point");
+        var st_message = document.getElementById("stpoint_message");
+        var points = ['서울', '인천', '대전', '대구', '부산', '울산', '광주'];
+        if (start.value.length == 0) {
+            st_message.style.color = "red";
+            st_message.innerHTML = '상차지주소를 입력해주세요';
+            return false;
+        } else if (points.indexOf(start.value.substr(0,2)) == -1) {
+            st_message.style.color = "red";
+            st_message.innerHTML = '유효하지 않은 상차지주소입니다. 다시 입력해주세요';
+            return false;
+        } else {
+            st_message.innerHTML = ''
+        }
+    }
+
+    var start_point = document.getElementById("start_point");
+    start_point.addEventListener("focusout", (event) => {
+        startCheck()
+    });
+    
+
+    function endCheck() {
+        var end = document.getElementById("end_point");
+        var end_message = document.getElementById("endpoint_message");
+        var points = ['서울', '인천', '대전', '대구', '부산', '울산', '광주'];
+        if (end.value.length == 0) {
+            end_message.style.color = "red";
+            end_message.innerHTML = '하차지주소를 입력해주세요';
+            return false;
+        } else if (points.indexOf(end.value.substr(0,2)) == -1) {
+            st_message.style.color = "red";
+            end_message.innerHTML = '유효하지 않은 하차지주소입니다. 다시 입력해주세요';
+            return false;
+        } else {
+            end_message.innerHTML = ''
+        }
+    }
+
+    var end_point = document.getElementById("end_point");
+    end_point.addEventListener("focusout", (event) => {
+        endCheck()
+    });
+
+
+    function check_board_form() {
+        var loadingtime = document.getElementById("loadingtime");
+        var unloadingtime = document.getElementById("unloadingtime");
+        var groupname = document.getElementById("groupname");
+        var start_name = document.getElementById("start_name");
+        var start_point = document.getElementById("start_point");
+        var end_name = document.getElementById("end_name");
+        var end_point = document.getElementById("end_point");
+        var carinfo = document.getElementById("carinfo");
+        var cost = document.getElementById("cost");
+        if (loadingtime.value.length == 0) {
+            alert('상차일을 입력해주세요');
+            return false;
+        }
+        if (unloadingtime.value.length == 0) {
+            alert('하차일을 입력해주세요');
+            return false;
+        }
+        if (groupname.value.length == 0) {
+            alert('업체명을 입력해주세요');
+            return false;
+        }
+        if (start_name.value.length == 0) {
+            alert('상차지명을 선택해주세요');
+            return false;
+        }
+        startCheck();
+        if (end_name.value.length == 0) {
+            alert('하차지명을 선택해주세요');
+            return false;
+        }
+        endCheck();
+        if (carinfo.value.length == 0) {
+            alert('요청톤수를 선택해주세요');
+            return false;
+        }
+        if (cost.value.length == 0) {
+            alert('요금정산을 진행해주세요');
+            return false;
+        }
     }
 
 </script>

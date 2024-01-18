@@ -93,10 +93,7 @@ def user_manage_service():
         return '불가능한 접근입니다'
 
 def user_logout_service():
-    conn = DB('dict')
-    SQL = "SELECT * FROM XMEMBER "
-    result = conn.select_all(SQL,None)
-    name = result[0].get('name')
+    name = str(session['userInfo'][0].get('name'))
     logs.logger.info(f'{name} 회원이 로그아웃 하였습니다.')
 
     session.pop('userInfo', None)

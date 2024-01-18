@@ -59,7 +59,7 @@ def user_profile_service():
 
 def user_manage_service():
     if '00' == session['userInfo'][0].get('grade'):
-        per_page = 10
+        per_page = 5
         page = request.args.get('page', 1, type=int)
         page, _, offset = get_page_args(per_page=per_page)
         dbcon = DB('dict')
@@ -101,7 +101,7 @@ def user_check_exists():
     SQL = "select count(0) as count from xmember where memberid = '{0}'".format(id)
     conn = DB('dict')
     result = conn.select_one(SQL,None)
-    
+
     if result.get("count") == 0:
         return '0'
     else:
@@ -154,7 +154,7 @@ def user_manage_table():
         FROM BOARD LIMIT {0} OFFSET {1}""".format(per_page, (page-1)*per_page)
     conn = DB('dict')
     result = conn.select_all(SQL, None)
-    
+
     return render_template('/user/table.html' ,boards=posts, pagination=Pagination(
             page=page,
             total=total,

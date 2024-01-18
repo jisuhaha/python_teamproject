@@ -18,7 +18,7 @@ app.register_blueprint(t_info_page)
 
 @app.route('/')
 def home():
-    return 'test001'
+    return render_template('home.html')
 
 @app.route('/login')
 def login():

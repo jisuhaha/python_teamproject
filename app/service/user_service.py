@@ -15,10 +15,10 @@ def user_login_service():
         memberid = request.form.get("memberid")
         password = request.form.get("password")
         #password = encrypt_pw(memberid,password)
-        name = request.form.get("name")
         SQL = "SELECT * FROM XMEMBER where memberid = '{0}' and password = '{1}'".format(memberid,password)
         conn = DB('dict')
         result = conn.select_all(SQL,None)
+        name = result[0].get('name')
         if len(result)==0:
             logs.logger.warning('로그인에 실패 하였습니다.')
             return render_template('/user/login.html')
@@ -99,7 +99,6 @@ def user_check_exists():
     SQL = "select count(0) as count from xmember where memberid = '{0}'".format(id)
     conn = DB('dict')
     result = conn.select_one(SQL,None)
-    print(result)
     if result.get("count") == 0:
         return '0'
     else:
@@ -152,7 +151,6 @@ def user_manage_table():
         FROM BOARD LIMIT {0} OFFSET {1}""".format(per_page, (page-1)*per_page)
     conn = DB('dict')
     result = conn.select_all(SQL, None)
-    print(SQL)
     return render_template('/user/table.html' ,boards=posts, pagination=Pagination(
             page=page,
             total=total,

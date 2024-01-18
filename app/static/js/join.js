@@ -8,7 +8,6 @@ setTimeout(() => {
   container.classList.add('sign-up')
 }, 200)
 
-
 $(document).ready(function () {
   $("input[name='grade']").change(function () {
     // 기사 선택 시.
@@ -49,14 +48,10 @@ $(document).ready(function () {
     checkPassword()
   });
   
-  
-  
-  
   var memberid = document.getElementById("memberid")
   memberid.addEventListener("focusout", (event) => {
     check_id()
   });
-  
   
   function check_id() {
     var id = document.getElementById("memberid").value;

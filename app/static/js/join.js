@@ -108,7 +108,7 @@ $(document).ready(function () {
   
   function nameCheck(){
     var name = document.getElementById("name");
-    if(name.length!=0){
+    if(name.value.length!=0){
       document.getElementById("name_message").innerHTML = "";
     }else{
       document.getElementById("name_message").innerHTML = "이름을 입력해주세요";
@@ -116,6 +116,11 @@ $(document).ready(function () {
       return false;
     }
   }
+  var uname = document.getElementById("name");
+  uname.addEventListener("focusout", (event) => {
+    nameCheck()
+  });
+  
   
   
   function joinform_check() {

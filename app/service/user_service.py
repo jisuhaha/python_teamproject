@@ -77,6 +77,7 @@ def user_manage_service():
         SQL = "SELECT * FROM XMEMBER LIMIT %s OFFSET %s"
         conn = DB('dict')
         result = conn.select_all(SQL,(per_page, (page-1)*per_page))
+        logs.logger.info('관리자 페이지에 접속하였습니다.')
         return render_template('/user/manage.html' ,users=posts, pagination=Pagination(
                 page=page,
                 total=total,
@@ -88,9 +89,16 @@ def user_manage_service():
             search=True
                             )
     else:
+        logs.logger.warning('관리자 페이지로 불법적으로 접근중입니다.')
         return '불가능한 접근입니다'
 
 def user_logout_service():
+    conn = DB('dict')
+    SQL = "SELECT * FROM XMEMBER "
+    result = conn.select_all(SQL,None)
+    name = result[0].get('name')
+    logs.logger.info(f'{name} 회원이 로그아웃 하였습니다.')
+
     session.pop('userInfo', None)
     return redirect(url_for('user_page.user_login_service'))
 
@@ -151,6 +159,7 @@ def user_manage_table():
         FROM BOARD LIMIT {0} OFFSET {1}""".format(per_page, (page-1)*per_page)
     conn = DB('dict')
     result = conn.select_all(SQL, None)
+
     return render_template('/user/table.html' ,boards=posts, pagination=Pagination(
             page=page,
             total=total,

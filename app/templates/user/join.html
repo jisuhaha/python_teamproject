@@ -16,7 +16,7 @@
     <div class="row">
       <!-- SIGN UP -->
       <div class="col align-items-center flex-col sign-up">
-        <form action="{{url_for('user_page.user_join_service')}}" method="post">
+        <form action="{{url_for('user_page.user_join_service')}}" method="post" name="join_form">
           <div class="form-wrapper align-items-center">
             <div class="form sign-up">
               <div class="input-group">
@@ -27,31 +27,36 @@
               <div class="input-group">
                 <i class='bx bxs-lock-alt'></i>
                 <input type="password" name="password" placeholder="비밀번호" id="password">
-              </div>
-              <div class="input-group">
-                <i class='bx bxs-lock-alt'></i>
-                <input type="password" name="re_password" placeholder="비밀번호 확인" id="re_password">
                 <p id="pw_message"></p>
               </div>
               <div class="input-group">
                 <i class='bx bxs-lock-alt'></i>
-                <input type="text" name="telphone" placeholder="연락처">
+                <input type="password" name="re_password" placeholder="비밀번호 확인" id="re_password">
+                <p id="repw_message"></p>
               </div>
               <div class="input-group">
                 <i class='bx bxs-lock-alt'></i>
-                <input type="text" name="name" placeholder="name">
+                <input type="text" name="telphone" placeholder="연락처" id="telphone">
+                <p id="tel_message"></p>
               </div>
               <div class="input-group">
                 <i class='bx bxs-lock-alt'></i>
-                <input id="info" type="text" name="info" placeholder="차량번호">
+                <input type="text" name="name" placeholder="name" id="name">
+                <p id="name_message"></p>
               </div>
               <div class="input-group">
                 <i class='bx bxs-lock-alt'></i>
-                <input id="carinfo" type="text" name="carinfo" placeholder="차량정보">
+                <input id="info" type="text" name="info" placeholder="차량번호" id="info">
+                <p id="info_message"></p>
+              </div>
+              <div class="input-group">
+                <i class='bx bxs-lock-alt'></i>
+                <input id="carinfo" type="text" name="carinfo" placeholder="차량정보" id="carinfo">
+                <p id="carinfo_message"></p>
               </div>
               <input type="radio" name="grade" value="10" checked>기사</label>
               <input type="radio" name="grade" value="20">고객사</label>
-              <button>
+              <button type="button" id="submit_button">
                 회원가입
               </button>
               <a href="{{url_for('user_page.user_login_service')}}">

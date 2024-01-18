@@ -7,25 +7,7 @@
   <title>Login Form</title>
   <link rel="stylesheet" href="{{url_for('static',filename='css/login.css')}}">
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-  <script>
-    $(document).ready(function () {
-      $("input[name='grade']").change(function () {
-        // 기사 선택 시.
-        if ($("input[name='grade']:checked").val() == '10') {
-          console.log(111)
-          $('#info').attr("placeholder", "차량번호");
-          $('#carinfo').show();
-        }
-        // 고객사 선택 시.
-        else if ($("input[name='grade']:checked").val() == '20') {
-          console.log(222)
-          $('#carinfo').hide();
-          $('#info').attr("placeholder", "고객사주소");
-        }
-      });
-
-    });
-  </script>
+  <script src="{{url_for('static',filename='js/join.js')}}"></script>
 </head>
 
 <body>
@@ -39,15 +21,17 @@
             <div class="form sign-up">
               <div class="input-group">
                 <i class='bx bxs-user'></i>
-                <input type="text" name="memberid" placeholder="아이디">
+                <input type="text" name="memberid" placeholder="아이디" id="memberid">
+                <p id="id_message"></p>
               </div>
               <div class="input-group">
                 <i class='bx bxs-lock-alt'></i>
-                <input type="password" name="password" placeholder="비밀번호">
+                <input type="password" name="password" placeholder="비밀번호" id="password">
               </div>
               <div class="input-group">
                 <i class='bx bxs-lock-alt'></i>
-                <input type="password" name="re_password" placeholder="비밀번호 확인">
+                <input type="password" name="re_password" placeholder="비밀번호 확인" id="re_password">
+                <p id="pw_message"></p>
               </div>
               <div class="input-group">
                 <i class='bx bxs-lock-alt'></i>

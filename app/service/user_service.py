@@ -104,6 +104,65 @@ def user_check_exists():
         return '0'
     else:
         return '1'
+
+
+def user_manage_table():
+    per_page = 5
+    page = request.args.get('page', 1, type=int)
+    user_oid = str(session['userInfo'][0].get('oid'))
+    page, _, offset = get_page_args(per_page=per_page)
+    dbcon = DB('dict')
+    cur = dbcon.cur
+    cur.execute("select count(0) as page FROM BOARD")
+    total = cur.fetchone().get('page')
+    cur.execute(
+        """SELECT 
+        groupname AS groupname,
+        (SELECT loadingpoint.name FROM loadingpoint WHERE loadingpoint.oid = board.loadingoid)AS loadingname,  
+        (SELECT loadingpoint.address FROM loadingpoint WHERE loadingpoint.oid = board.loadingoid)AS loadingaddress,  
+        board.loadingtime,
+        (SELECT loadingpoint.name FROM loadingpoint WHERE loadingpoint.oid = board.unloadingoid)AS unloadingname,  
+        (SELECT loadingpoint.address FROM loadingpoint WHERE loadingpoint.oid = board.unloadingoid)AS unloadingaddress,  
+        board.unloadingtime ,
+        board.weight_t AS car,
+        board.cost,
+        ifnull((select xmember.name FROM xmember WHERE xmember.oid = board.driverid),'') as name,
+        ifnull((select xmember.telphone FROM xmember WHERE xmember.oid = board.driverid),'') as telphone ,
+        ifnull((select xmember.info FROM xmember WHERE xmember.oid = board.driverid),'') as info ,
+        ifnull((select xmember.carinfo FROM xmember WHERE xmember.oid = board.driverid),'') as carinfo
+        FROM BOARD LIMIT {0} OFFSET {1}""".format(per_page, offset)
+    )
+    posts = cur.fetchall()
+    cur.close()
+
+    SQL = """SELECT 
+        groupname AS groupname,
+        (SELECT loadingpoint.name FROM loadingpoint WHERE loadingpoint.oid = board.loadingoid)AS loadingname,  
+        (SELECT loadingpoint.address FROM loadingpoint WHERE loadingpoint.oid = board.loadingoid)AS loadingaddress,  
+        board.loadingtime,
+        (SELECT loadingpoint.name FROM loadingpoint WHERE loadingpoint.oid = board.unloadingoid)AS unloadingname,  
+        (SELECT loadingpoint.address FROM loadingpoint WHERE loadingpoint.oid = board.unloadingoid)AS unloadingaddress,  
+        board.unloadingtime ,
+        board.weight_t AS car,
+        board.cost,
+        ifnull((select xmember.name FROM xmember WHERE xmember.oid = board.driverid),'') as name,
+        ifnull((select xmember.telphone FROM xmember WHERE xmember.oid = board.driverid),'') as telphone ,
+        ifnull((select xmember.info FROM xmember WHERE xmember.oid = board.driverid),'') as info ,
+        ifnull((select xmember.carinfo FROM xmember WHERE xmember.oid = board.driverid),'') as carinfo
+        FROM BOARD LIMIT {0} OFFSET {1}""".format(per_page, (page-1)*per_page)
+    conn = DB('dict')
+    result = conn.select_all(SQL, None)
+    print(SQL)
+    return render_template('/user/table.html' ,boards=posts, pagination=Pagination(
+            page=page,
+            total=total,
+            per_page=per_page,
+            prev_label="<<",
+            next_label=">>",
+            format_total=True,
+        ),
+        search=True
+                        )
     
 
 

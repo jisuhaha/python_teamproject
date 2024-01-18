@@ -16,14 +16,16 @@
             <h2>물류시스템</h2>
             <nav>
                 <ul>
-                    <li><a href="/driver/assignable">운송 신청</a></li>
-                    <li><a href="#">내 배정현황</a></li>
+                    <li><a href="/user/manage">사용자 목록</a></li>
+                    <li><a href="#">운송목록</a></li>
                     <li><a href="/user/logout">logout</a></li>
                 </ul>
             </nav>
         </header>
     </div>
-    <h1>내 배정현황</h1>
+    <!-- <a href="/user/manage" class="">사용자 목록</a>
+    <a href="/user/logout" class="btn-gradient blue mini">로그아웃</a> -->
+    <h1>운송현황</h1>
     <table class="container">
         <thead>
             <tr>
@@ -52,12 +54,12 @@
                 <td>{{board.unloadingname}}</td>
                 <td>{{board.unloadingaddress}}</td>
                 <td>{{board.unloadingtime}}</td>
-                <td>{{board.car}}</td>
-                <td>{{board.cost}}</td>
+                <td>{{board.car}}톤</td>
+                <td>{{board.cost}}원</td>
                 <td>{{board.name}}</td>
                 <td>{{board.telphone}}</td>
                 <td>{{board.info}}</td>
-                <td>{{board.carinfo}}</td>
+                <td>{{board.carinfo}}톤</td>
             </tr>
             {% endfor %}
         </tbody>

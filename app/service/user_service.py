@@ -20,7 +20,7 @@ def user_login_service():
         conn = DB('dict')
         result = conn.select_all(SQL,None)
         if len(result)==0:
-            logs.logger.info(f'{name} 관리자가 로그인 하였습니다.')
+            logs.logger.warning('로그인에 실패 하였습니다.')
             return render_template('/user/login.html')
         else:
             session['userInfo'] = result
@@ -31,7 +31,7 @@ def user_login_service():
                 logs.logger.info(f'{name} 고객사가 로그인 하였습니다.')
                 return redirect(url_for('cust_page.cust_table_service'))
             else :
-                logs.logger.info(f'{name} 관리자가 로그인 하였습니다.')
+                logs.logger.info('관리자가 로그인 하였습니다.')
                 return redirect(url_for('user_page.user_manage_service'))
 
 def user_join_service():

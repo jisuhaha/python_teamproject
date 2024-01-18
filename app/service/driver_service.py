@@ -136,7 +136,9 @@ def assignable_table_service():
 def driver_assign_service():
     user_oid = str(session['userInfo'][0].get('oid'))
     boardOID = request.form.get("boardOID")
+    name = str(session['userInfo'][0].get('name'))
     conn = DB('dict')
     SQL = "UPDATE board SET driverid = {0} where oid = {1}".format(user_oid, boardOID)
     conn.save_one(SQL, None)
+    logs.logger.info(f'{name}기사님의 운송이 지정되었습니다.')
     return redirect(url_for('driver_page.driver_mytable_service'))
